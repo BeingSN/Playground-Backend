@@ -1,0 +1,62 @@
+name: Docker build to trigger manually based on workflow dispatch
+
+env:
+  SERVICE_NAME: express-app
+  PROJECT_ID: dev-hachiai
+  REPO_NAME: playground-2-0-be
+  
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to build from'
+        required: true
+        default: 'master'
+      tag:
+        description: 'Docker image tag (e.g., version, commit SHA, etc.)'
+        required: true
+        default: 'latest'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.branch }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # Use a Node.js version that matches your project
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0.2.0
+        with:
+          service_account_key: ${{ secrets.GOOGLE_CREDENTIALS }}
+          project_id: ${{ env.PROJECT_ID }}
+
+      - name: Authenticate Docker with Google Artifact Registry
+        run: gcloud --quiet auth configure-docker northamerica-northeast2-docker.pkg.dev
+
+      - name: Prepare environment variables
+        run: echo "IMAGE_TAG=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
+
+      - name: Build and tag Docker image
+        run: |
+          docker build --tag northamerica-northeast2-docker.pkg.dev/${{ env.PROJECT_ID }}/llm-artifactory/${{ env.REPO_NAME }}:$IMAGE_TAG .
+
+      - name: Push Docker image
+        run: |
+          docker push northamerica-northeast2-docker.pkg.dev/${{ env.PROJECT_ID }}/llm-artifactory/${{ env.REPO_NAME }}:$IMAGE_TAG
+
+      - name: Tag and push 'latest' image
+        if: ${{ github.event.inputs.tag != 'latest' }}
+        run: |
+          docker tag northamerica-northeast2-docker.pkg.dev/${{ env.PROJECT_ID }}/llm-artifactory/${{ env.REPO_NAME }}:$IMAGE_TAG northamerica-northeast2-docker.pkg.dev/${{ env.PROJECT_ID }}/llm-artifactory/${{ env.REPO_NAME }}:latest
+          docker push northamerica-northeast2-docker.pkg.dev/${{ env.PROJECT_ID }}/llm-artifactory/${{ env.REPO_NAME }}:latest
