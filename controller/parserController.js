@@ -239,10 +239,10 @@ exports.createParserController = async (req, res) => {
 
     const configJSON = JSON.stringify({
       sql: "mysql",
-      sqlUrl: `jdbc:mysql://${process.env.MYSQL_HOST}:3306/${process.env.MYSQL_DATABASE}`,
+      sqlUrl: `jdbc:mysql://${process.env.MYSQL_HOST}:3306/${process.env.MYSQL_STAGE_DATABASE}`,
       userName: process.env.MYSQL_USER,
       password: process.env.MYSQL_PASSWORD,
-      database: process.env.MYSQL_DATABASE,
+      database: process.env.MYSQL_STAGE_DATABASE,
       table: databaseTableName,
       llmPromptDatabaseTable: "llm_parser_prompt",
       show_query: false,
