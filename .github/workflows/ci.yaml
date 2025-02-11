@@ -42,21 +42,21 @@ jobs:
           project_id: ${{ env.PROJECT_ID }}
 
       - name: Authenticate Docker with Google Artifact Registry
-        run: gcloud --quiet auth configure-docker northamerica-northeast2-docker.pkg.dev
+        run: gcloud --quiet auth configure-docker
 
       - name: Prepare environment variables
         run: echo "IMAGE_TAG=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
 
       - name: Build and tag Docker image
         run: |
-          docker build --tag northamerica-northeast2-docker.pkg.dev/${{ env.PROJECT_ID }}/llm-artifactory/${{ env.REPO_NAME }}:$IMAGE_TAG .
+          docker build --tag gcr.io/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}:$IMAGE_TAG .
 
       - name: Push Docker image
         run: |
-          docker push northamerica-northeast2-docker.pkg.dev/${{ env.PROJECT_ID }}/llm-artifactory/${{ env.REPO_NAME }}:$IMAGE_TAG
+          docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}:$IMAGE_TAG
 
       - name: Tag and push 'latest' image
         if: ${{ github.event.inputs.tag != 'latest' }}
         run: |
-          docker tag northamerica-northeast2-docker.pkg.dev/${{ env.PROJECT_ID }}/llm-artifactory/${{ env.REPO_NAME }}:$IMAGE_TAG northamerica-northeast2-docker.pkg.dev/${{ env.PROJECT_ID }}/llm-artifactory/${{ env.REPO_NAME }}:latest
-          docker push northamerica-northeast2-docker.pkg.dev/${{ env.PROJECT_ID }}/llm-artifactory/${{ env.REPO_NAME }}:latest
+          docker tag gcr.io/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}:$IMAGE_TAG gcr.io/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}:latest
+          docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}:latest
