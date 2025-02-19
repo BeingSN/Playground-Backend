@@ -11,7 +11,7 @@ on:
       branch:
         description: 'Branch to build from'
         required: true
-        default: 'master'
+        default: 'main'
       tag:
         description: 'Docker image tag (e.g., version, commit SHA, etc.)'
         required: true
