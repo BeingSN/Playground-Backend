@@ -9,4 +9,6 @@ router.post("/create-parser", parserController.createParserController);
 
 router.post("/onboard-template", parserController.onBoardTemplateController);
 
+router.get("/get-all-tables-info", parserController.getAllTablesInformation);
+
 module.exports = router;
