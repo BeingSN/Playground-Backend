@@ -1,0 +1,75 @@
+{"level":"info","message":"✅ llm_template_list: Fetched 2 records, Page: 1, Limit: 2 (Execution Time: 10ms)","timestamp":"2025-03-19T10:30:26.563Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 2 records, Page: 1, Limit: 2 (Execution Time: 4ms)","timestamp":"2025-03-19T10:30:40.656Z"}
+{"level":"info","message":"Parser created successfully","orgId":"873f6d6c-c7d5-4d41-89c0-c37816430d04","parserId":16,"parserName":"demo testing parser","timestamp":"2025-03-19T10:36:39.459Z"}
+{"level":"info","message":"Template onboarded successfully","parserId":"16","templateId":13,"templateName":"demo testing name","timestamp":"2025-03-19T10:37:53.187Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 9 records, Page: 1, Limit: 9 (Execution Time: 5ms)","timestamp":"2025-03-19T10:38:33.346Z"}
+{"level":"warn","message":"❗Table name is missing in request query.","timestamp":"2025-03-19T10:40:15.335Z"}
+{"level":"info","message":"Successfully inserted 6 prompts.","timestamp":"2025-03-19T10:40:39.116Z"}
+{"level":"info","message":"Successfully inserted 6 prompts.","timestamp":"2025-03-19T10:42:21.332Z"}
+{"level":"info","message":"Successfully inserted 6 prompts.","timestamp":"2025-03-19T10:45:58.631Z"}
+{"level":"info","message":"✅ llm_parser_prompt: Fetched 6 records, Page: 1, Limit: 9 (Execution Time: 10ms)","timestamp":"2025-03-19T10:46:51.552Z"}
+{"level":"info","message":"✅ llm_parser_prompt: Fetched 2 records, Page: 1, Limit: 2 (Execution Time: 6ms)","timestamp":"2025-03-19T10:46:57.421Z"}
+{"level":"info","message":"✅ llm_parser_prompt: Fetched 6 records, Page: 1, Limit: 7 (Execution Time: 6ms)","timestamp":"2025-03-19T10:47:09.000Z"}
+{"level":"warn","message":"❗Table name is missing in request query.","timestamp":"2025-03-19T10:47:24.558Z"}
+{"level":"warn","message":"❗Table name is missing in request query.","timestamp":"2025-03-19T10:48:23.015Z"}
+{"level":"warn","message":"❗Table name is missing in request query.","timestamp":"2025-03-19T10:51:01.675Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 7ms)","timestamp":"2025-03-19T10:51:13.596Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 13ms)","timestamp":"2025-03-19T11:10:10.318Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 7ms)","timestamp":"2025-03-19T11:10:12.167Z"}
+{"level":"info","message":"✅ llm_parser_prompt: Fetched 6 records, Page: 1, Limit: 7 (Execution Time: 11ms)","timestamp":"2025-03-19T11:10:12.928Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 15ms)","timestamp":"2025-03-19T11:10:14.019Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 7ms)","timestamp":"2025-03-19T11:10:23.000Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 7ms)","timestamp":"2025-03-19T11:10:34.475Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 6ms)","timestamp":"2025-03-19T11:10:49.812Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 12ms)","timestamp":"2025-03-19T11:10:54.204Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 7ms)","timestamp":"2025-03-19T11:11:03.165Z"}
+{"level":"info","message":"✅ parser_config: Fetched 1 records, Page: 1, Limit: 1 (Execution Time: 7ms)","timestamp":"2025-03-19T11:11:47.028Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 7ms)","timestamp":"2025-03-19T11:11:47.041Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 5ms)","timestamp":"2025-03-19T11:11:57.414Z"}
+{"level":"info","message":"✅ parser_config: Fetched 1 records, Page: 1, Limit: 1 (Execution Time: 7ms)","timestamp":"2025-03-19T11:12:03.056Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 5ms)","timestamp":"2025-03-19T11:12:03.067Z"}
+{"level":"info","message":"✅ parser_config: Fetched 1 records, Page: 1, Limit: 1 (Execution Time: 10ms)","timestamp":"2025-03-19T11:12:11.146Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 8ms)","timestamp":"2025-03-19T11:12:11.160Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 15ms)","timestamp":"2025-03-19T11:14:56.294Z"}
+{"level":"info","message":"✅ llm_parser_prompt: Fetched 6 records, Page: 1, Limit: 7 (Execution Time: 16ms)","timestamp":"2025-03-19T11:14:57.307Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 7ms)","timestamp":"2025-03-19T11:15:00.210Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 27ms)","timestamp":"2025-03-19T11:15:01.804Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 5ms)","timestamp":"2025-03-19T11:15:35.437Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 11ms)","timestamp":"2025-03-19T11:15:49.251Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 12ms)","timestamp":"2025-03-19T11:15:54.515Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 4 records, Page: 2, Limit: 7 (Execution Time: 6ms)","timestamp":"2025-03-19T11:16:03.746Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 4ms)","timestamp":"2025-03-19T11:16:05.935Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 10 records, Page: 1, Limit: 10 (Execution Time: 6ms)","timestamp":"2025-03-19T11:16:10.483Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 1 records, Page: 2, Limit: 10 (Execution Time: 4ms)","timestamp":"2025-03-19T11:16:13.201Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 10 records, Page: 1, Limit: 10 (Execution Time: 5ms)","timestamp":"2025-03-19T11:16:14.827Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 5 records, Page: 1, Limit: 5 (Execution Time: 6ms)","timestamp":"2025-03-19T11:16:28.437Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 9ms)","timestamp":"2025-03-19T11:16:31.538Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 10 records, Page: 1, Limit: 10 (Execution Time: 9ms)","timestamp":"2025-03-19T11:16:34.258Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 10 records, Page: 1, Limit: 10 (Execution Time: 3ms)","timestamp":"2025-03-19T11:16:53.624Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 2 records, Page: 1, Limit: 2 (Execution Time: 6ms)","timestamp":"2025-03-19T11:17:13.820Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 5ms)","timestamp":"2025-03-19T11:17:18.108Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 9 records, Page: 1, Limit: 9 (Execution Time: 4ms)","timestamp":"2025-03-19T11:17:22.854Z"}
+{"level":"info","message":"✅ parser_config: Fetched 10 records, Page: 1, Limit: 10 (Execution Time: 19ms)","timestamp":"2025-03-19T11:17:30.857Z"}
+{"level":"info","message":"✅ parser_config: Fetched 5 records, Page: 1, Limit: 5 (Execution Time: 12ms)","timestamp":"2025-03-19T11:17:34.956Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 4ms)","timestamp":"2025-03-19T11:17:39.561Z"}
+{"level":"info","message":"✅ parser_config: Fetched 16 records, Page: 1, Limit: 50 (Execution Time: 12ms)","timestamp":"2025-03-19T11:17:49.820Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 5ms)","timestamp":"2025-03-19T11:17:55.409Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 2, Limit: 7 (Execution Time: 9ms)","timestamp":"2025-03-19T11:17:57.499Z"}
+{"level":"info","message":"✅ parser_config: Fetched 2 records, Page: 3, Limit: 7 (Execution Time: 6ms)","timestamp":"2025-03-19T11:17:58.456Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 2, Limit: 7 (Execution Time: 7ms)","timestamp":"2025-03-19T11:17:59.730Z"}
+{"level":"info","message":"✅ parser_config: Fetched 2 records, Page: 3, Limit: 7 (Execution Time: 12ms)","timestamp":"2025-03-19T11:18:10.402Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 2, Limit: 7 (Execution Time: 7ms)","timestamp":"2025-03-19T11:18:11.447Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 6ms)","timestamp":"2025-03-19T11:18:11.783Z"}
+{"level":"info","message":"✅ parser_config: Fetched 5 records, Page: 1, Limit: 5 (Execution Time: 4ms)","timestamp":"2025-03-19T11:18:14.110Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 5 records, Page: 1, Limit: 5 (Execution Time: 14ms)","timestamp":"2025-03-19T11:19:34.702Z"}
+{"level":"info","message":"✅ parser_config: Fetched 5 records, Page: 1, Limit: 5 (Execution Time: 11ms)","timestamp":"2025-03-19T11:19:35.223Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 14ms)","timestamp":"2025-03-19T11:19:45.622Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 2, Limit: 7 (Execution Time: 17ms)","timestamp":"2025-03-19T11:19:52.281Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 7ms)","timestamp":"2025-03-19T11:21:32.439Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 7ms)","timestamp":"2025-03-19T11:21:40.438Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 8ms)","timestamp":"2025-03-19T11:21:44.127Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 13ms)","timestamp":"2025-03-19T11:23:22.387Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 7 records, Page: 1, Limit: 7 (Execution Time: 6ms)","timestamp":"2025-03-19T11:23:27.304Z"}
+{"level":"info","message":"✅ llm_parser_prompt: Fetched 6 records, Page: 1, Limit: 7 (Execution Time: 4ms)","timestamp":"2025-03-19T11:23:28.738Z"}
+{"level":"info","message":"✅ llm_parser_prompt: Fetched 6 records, Page: 1, Limit: 10 (Execution Time: 5ms)","timestamp":"2025-03-19T11:23:32.195Z"}
+{"level":"info","message":"✅ parser_config: Fetched 10 records, Page: 1, Limit: 10 (Execution Time: 7ms)","timestamp":"2025-03-19T11:23:38.467Z"}
