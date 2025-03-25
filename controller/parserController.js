@@ -222,13 +222,82 @@ const allowedTables = [
   "llm_template_list",
 ];
 
+// exports.getAllTablesInformation = async (req, res) => {
+//   let connection;
+//   const { table, page = 1, limit = 10 } = req.query;
+
+//   try {
+//     const startTime = Date.now(); // ⏳ Track execution time
+
+//     if (!table) {
+//       logger.warn("❗Table name is missing in request query.");
+//       return res
+//         .status(400)
+//         .json({ status: 400, message: "Table name is required." });
+//     }
+
+//     if (!allowedTables.includes(table)) {
+//       logger.warn(`❗Invalid table name requested: ${table}`);
+//       return res
+//         .status(400)
+//         .json({ status: 400, message: "Invalid table name." });
+//     }
+
+//     const parsedLimit = Math.max(1, parseInt(limit)) || 10; // ✅ Prevent invalid limit
+//     const parsedPage = Math.max(1, parseInt(page)) || 1; // ✅ Prevent invalid page
+//     const offset = (parsedPage - 1) * parsedLimit;
+
+//     const pool = await dbPromise;
+//     connection = await pool.getConnection();
+
+//     const [[{ totalRecords }]] = await connection.query(
+//       `SELECT COUNT(*) AS totalRecords FROM ??`,
+//       [table]
+//     );
+
+//     // ✅ Fetch paginated data
+//     const [tableData] = await connection.query(
+//       `SELECT * FROM ?? LIMIT ? OFFSET ?`,
+//       [table, parsedLimit, offset]
+//     );
+
+//     const executionTime = Date.now() - startTime;
+//     logger.info(
+//       `✅ ${table}: Fetched ${tableData.length} records, Page: ${parsedPage}, Limit: ${parsedLimit} (Execution Time: ${executionTime}ms)`
+//     );
+
+//     res.status(200).json({
+//       status: 200,
+//       message: `Data fetched successfully from ${table}`,
+//       data: tableData,
+//       pagination: {
+//         table,
+//         totalRecords,
+//         currentPage: parsedPage,
+//         totalPages: Math.ceil(totalRecords / parsedLimit),
+//       },
+//     });
+//   } catch (error) {
+//     logger.error(`❌ Error fetching table data: ${error.message}`);
+//     res.status(500).json({
+//       status: 500,
+//       error: "Database Error",
+//       message:
+//         error.message || "Something went wrong while fetching table data.",
+//     });
+//   } finally {
+//     if (connection) connection.release();
+//   }
+// };
+
 exports.getAllTablesInformation = async (req, res) => {
   let connection;
-  const { table, page = 1, limit = 10 } = req.query;
+  const { table, page = 1, limit = 10, search = "" } = req.query;
 
   try {
-    const startTime = Date.now(); // ⏳ Track execution time
+    const startTime = Date.now();
 
+    // Validate `table` parameter
     if (!table) {
       logger.warn("❗Table name is missing in request query.");
       return res
@@ -236,6 +305,7 @@ exports.getAllTablesInformation = async (req, res) => {
         .json({ status: 400, message: "Table name is required." });
     }
 
+    // Check if the table is allowed
     if (!allowedTables.includes(table)) {
       logger.warn(`❗Invalid table name requested: ${table}`);
       return res
@@ -243,29 +313,66 @@ exports.getAllTablesInformation = async (req, res) => {
         .json({ status: 400, message: "Invalid table name." });
     }
 
-    const parsedLimit = Math.max(1, parseInt(limit)) || 10; // ✅ Prevent invalid limit
-    const parsedPage = Math.max(1, parseInt(page)) || 1; // ✅ Prevent invalid page
+    const parsedLimit = Math.max(1, parseInt(limit)) || 10;
+    const parsedPage = Math.max(1, parseInt(page)) || 1;
     const offset = (parsedPage - 1) * parsedLimit;
 
     const pool = await dbPromise;
     connection = await pool.getConnection();
 
+    // Retrieve column names for the table
+    const [columns] = await connection.query(`SHOW COLUMNS FROM ??`, [table]);
+    const columnNames = columns.map((col) => col.Field);
+
+    logger.info(`✅ Retrieved columns for table ${table}:`, columnNames);
+
+    // Construct dynamic search query
+    let searchQuery = "";
+    const searchParams = [];
+    if (search.trim() && columnNames.length > 0) {
+      searchQuery = ` AND (${columnNames.map(() => `?? LIKE ?`).join(" OR ")})`;
+      columnNames.forEach((col) => {
+        searchParams.push(col);
+        searchParams.push(`%${search.trim()}%`);
+      });
+    }
+
+    // Count total records matching the search filter
     const [[{ totalRecords }]] = await connection.query(
-      `SELECT COUNT(*) AS totalRecords FROM ??`,
-      [table]
+      `SELECT COUNT(*) AS totalRecords FROM ?? WHERE 1=1 ${searchQuery}`,
+      [table, ...searchParams]
     );
 
-    // ✅ Fetch paginated data
+    // If no matching records are found, return an empty array
+    if (totalRecords === 0) {
+      logger.info(
+        `⚠️ No records found for table: ${table} with search filter: ${search}`
+      );
+      return res.status(200).json({
+        status: 200,
+        message: `No data found for table: ${table}`,
+        data: [],
+        pagination: {
+          table,
+          totalRecords: 0,
+          currentPage: 0,
+          totalPages: 0,
+        },
+      });
+    }
+
+    // Fetch paginated data based on the filter
     const [tableData] = await connection.query(
-      `SELECT * FROM ?? LIMIT ? OFFSET ?`,
-      [table, parsedLimit, offset]
+      `SELECT * FROM ?? WHERE 1=1 ${searchQuery} LIMIT ? OFFSET ?`,
+      [table, ...searchParams, parsedLimit, offset]
     );
 
     const executionTime = Date.now() - startTime;
     logger.info(
-      `✅ ${table}: Fetched ${tableData.length} records, Page: ${parsedPage}, Limit: ${parsedLimit} (Execution Time: ${executionTime}ms)`
+      `✅ ${table}: Fetched ${tableData.length} records (Execution Time: ${executionTime}ms)`
     );
 
+    // Return the response with data
     res.status(200).json({
       status: 200,
       message: `Data fetched successfully from ${table}`,
@@ -278,7 +385,7 @@ exports.getAllTablesInformation = async (req, res) => {
       },
     });
   } catch (error) {
-    logger.error(`❌ Error fetching table data: ${error.message}`);
+    logger.error(`❌ Error: ${error.message}`);
     res.status(500).json({
       status: 500,
       error: "Database Error",
@@ -286,49 +393,6 @@ exports.getAllTablesInformation = async (req, res) => {
         error.message || "Something went wrong while fetching table data.",
     });
   } finally {
-    if (connection) connection.release(); // ✅ Always release DB connection
+    if (connection) connection.release();
   }
 };
-
-// exports.getAllTablesInformation = async (req, res) => {
-//   let connection;
-//   try {
-//     const pool = await dbPromise;
-//     connection = await pool.getConnection();
-
-//     const [parserPrompts] = await connection.query(
-//       "SELECT id, prompt, db_column, column_type, parser_id, date_created, date_updated FROM llm_parser_prompt"
-//     );
-
-//     const [parserConfigs] = await connection.query(
-//       "SELECT id, org_id, name, config, status, date_created, date_updated FROM parser_config"
-//     );
-
-//     const [templateList] = await connection.query(
-//       "SELECT id, template_name, template_matching_text, template_prompt, parser_id, date_created, date_updated FROM llm_template_list"
-//     );
-
-//     res.status(200).json({
-//       status: 200,
-//       message: "Tables fetched successfully",
-//       data: {
-//         llm_parser_prompt: parserPrompts,
-//         parser_config: parserConfigs,
-//         llm_template_list: templateList,
-//       },
-//     });
-//   } catch (error) {
-//     console.error("Error fetching table data:", error.message);
-
-//     const statusCode = error.code === "ER_BAD_DB_ERROR" ? 400 : 500;
-
-//     res.status(statusCode).json({
-//       status: statusCode,
-//       error: "Database Error",
-//       message:
-//         error.message || "Something went wrong while fetching table data.",
-//     });
-//   } finally {
-//     if (connection) connection.release(); // Always release connection
-//   }
-// };

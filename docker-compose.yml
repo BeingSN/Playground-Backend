@@ -1,20 +1,6 @@
-version: "3.1"
+version: "3.8"
 
 services:
-  frontend:
-    build: ./Playground-2.0
-    container_name: react_frontend
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
-    environment:
-      - REACT_APP_API_URL=${REACT_APP_API_URL}
-    volumes:
-      - ./Playground-2.0:/app
-      - /app/node_modules
-    working_dir: /app
-
   backend:
     build: .
     container_name: express_backend
@@ -26,7 +12,7 @@ services:
       - DB_HOST=${MYSQL_HOST}
       - DB_USER=${MYSQL_USER}
       - DB_PASS=${MYSQL_PASSWORD}
-      - DB_NAME=${MYSQL_CLIENT_DB_NAME}
+      - DB_NAME=${MYSQL_DATABASE}
     volumes:
       - .:/app
       - /app/node_modules
@@ -35,15 +21,15 @@ services:
 
   db:
     image: mysql:latest
-    container_name: mysql_db
+    container_name: mysql_dbb
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE} # FIXED: Using the correct database
-      MYSQL_USER: ${MYSQL_USER} # FIXED: Using .env value
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD} # FIXED: Using .env value
+      MYSQL_DATABASE: ${MYSQL_DATABASE} # Uses uxploreaudit
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - db_data:/var/lib/mysql
 
