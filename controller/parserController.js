@@ -222,74 +222,6 @@ const allowedTables = [
   "llm_template_list",
 ];
 
-// exports.getAllTablesInformation = async (req, res) => {
-//   let connection;
-//   const { table, page = 1, limit = 10 } = req.query;
-
-//   try {
-//     const startTime = Date.now(); // ⏳ Track execution time
-
-//     if (!table) {
-//       logger.warn("❗Table name is missing in request query.");
-//       return res
-//         .status(400)
-//         .json({ status: 400, message: "Table name is required." });
-//     }
-
-//     if (!allowedTables.includes(table)) {
-//       logger.warn(`❗Invalid table name requested: ${table}`);
-//       return res
-//         .status(400)
-//         .json({ status: 400, message: "Invalid table name." });
-//     }
-
-//     const parsedLimit = Math.max(1, parseInt(limit)) || 10; // ✅ Prevent invalid limit
-//     const parsedPage = Math.max(1, parseInt(page)) || 1; // ✅ Prevent invalid page
-//     const offset = (parsedPage - 1) * parsedLimit;
-
-//     const pool = await dbPromise;
-//     connection = await pool.getConnection();
-
-//     const [[{ totalRecords }]] = await connection.query(
-//       `SELECT COUNT(*) AS totalRecords FROM ??`,
-//       [table]
-//     );
-
-//     // ✅ Fetch paginated data
-//     const [tableData] = await connection.query(
-//       `SELECT * FROM ?? LIMIT ? OFFSET ?`,
-//       [table, parsedLimit, offset]
-//     );
-
-//     const executionTime = Date.now() - startTime;
-//     logger.info(
-//       `✅ ${table}: Fetched ${tableData.length} records, Page: ${parsedPage}, Limit: ${parsedLimit} (Execution Time: ${executionTime}ms)`
-//     );
-
-//     res.status(200).json({
-//       status: 200,
-//       message: `Data fetched successfully from ${table}`,
-//       data: tableData,
-//       pagination: {
-//         table,
-//         totalRecords,
-//         currentPage: parsedPage,
-//         totalPages: Math.ceil(totalRecords / parsedLimit),
-//       },
-//     });
-//   } catch (error) {
-//     logger.error(`❌ Error fetching table data: ${error.message}`);
-//     res.status(500).json({
-//       status: 500,
-//       error: "Database Error",
-//       message:
-//         error.message || "Something went wrong while fetching table data.",
-//     });
-//   } finally {
-//     if (connection) connection.release();
-//   }
-// };
-
 exports.getAllTablesInformation = async (req, res) => {
   let connection;
   const { table, page = 1, limit = 10, search = "" } = req.query;
@@ -329,12 +261,25 @@ exports.getAllTablesInformation = async (req, res) => {
     // Construct dynamic search query
     let searchQuery = "";
     const searchParams = [];
+
     if (search.trim() && columnNames.length > 0) {
-      searchQuery = ` AND (${columnNames.map(() => `?? LIKE ?`).join(" OR ")})`;
-      columnNames.forEach((col) => {
-        searchParams.push(col);
-        searchParams.push(`%${search.trim()}%`);
-      });
+      // Special logic for `llm_parser_prompt` and `llm_template_list` with digits
+      if (
+        ["llm_parser_prompt", "llm_template_list"].includes(table) &&
+        /^\d+$/.test(search.trim()) // Check for numbers (single or multiple digits)
+      ) {
+        searchQuery = ` AND parser_id = ?`;
+        searchParams.push(search.trim()); // Exact match for parser_id
+      } else {
+        // Default search logic (applies to all other cases)
+        searchQuery = ` AND (${columnNames
+          .map(() => `?? LIKE ?`)
+          .join(" OR ")})`;
+        columnNames.forEach((col) => {
+          searchParams.push(col); // Column name
+          searchParams.push(`%${search.trim()}%`); // Search value with wildcards
+        });
+      }
     }
 
     // Count total records matching the search filter
