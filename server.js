@@ -10,7 +10,7 @@ const PORT = 5000;
 app.use(express.json());
 app.use(cors()); // Enable CORS for all routes
 
-app.use("/", parserRoutes);
+app.use("/api", parserRoutes);
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT} `);
