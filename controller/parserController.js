@@ -329,14 +329,8 @@ exports.onBoardTemplateController = async (req, res) => {
     const pool = await dbPromise;
     const connection = await pool.getConnection();
 
-    const {
-      parserId,
-      templateName,
-      textToMatchInTemplate,
-      template_prompt,
-      preCustomRules, // ← new
-      postCustomRules, // ← new
-    } = req.body;
+    const { parserId, templateName, textToMatchInTemplate, template_prompt } =
+      req.body;
 
     if (!parserId || !templateName || !textToMatchInTemplate) {
       logger.warn("Missing required fields in onboarding request", {
@@ -367,8 +361,8 @@ exports.onBoardTemplateController = async (req, res) => {
 
     const insertQuery = `
       INSERT INTO llm_template_list
-      (template_name, template_matching_text, template_prompt, parser_id, pre_custom_rules, post_custom_rules, date_created, date_updated)
-      VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW());
+      (template_name, template_matching_text, template_prompt, parser_id, date_created, date_updated)
+      VALUES (?, ?, ?, ?, NOW(), NOW());
     `;
 
     const values = [
@@ -376,8 +370,6 @@ exports.onBoardTemplateController = async (req, res) => {
       textToMatchInTemplate,
       template_prompt,
       parserId,
-      preCustomRules || null, // Handle nulls if not provided
-      postCustomRules || null,
     ];
 
     const [result] = await connection.execute(insertQuery, values);
