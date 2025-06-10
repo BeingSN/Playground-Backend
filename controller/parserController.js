@@ -80,9 +80,10 @@ exports.insertPromptsController = async (req, res) => {
         db_column,
         column_type,
         parser_id,
-        value_type, // ← NEW
-        mandatory_value, // ← NEW
+        value_type,
+        mandatory_value,
         prompt_order,
+        name, // ← NEW
       } = promptData;
 
       // Validate required fields
@@ -102,12 +103,14 @@ exports.insertPromptsController = async (req, res) => {
       }
 
       const query = `
-      INSERT INTO llm_parser_prompt
-        (prompt, db_column, column_type, parser_id,
-         value_type, mandatory_value, prompt_order,  -- ← add the column
-         date_created, date_updated)
-      VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW());     -- ← add a 7th placeholder
-    `;
+        INSERT INTO llm_parser_prompt (
+          prompt, db_column, column_type, parser_id,
+          value_type, mandatory_value, prompt_order,
+          name,                   -- ← NEW COLUMN
+          date_created, date_updated
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW());
+      `;
 
       await connection.query(query, [
         prompt,
@@ -116,7 +119,8 @@ exports.insertPromptsController = async (req, res) => {
         parser_id,
         value_type,
         mandatory_value,
-        prompt_order, // now lines up with the 7th ?
+        prompt_order,
+        name || null, // ← use null if name is undefined
       ]);
     }
 
