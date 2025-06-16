@@ -34,4 +34,4 @@ To manually trigger a build:
 
 1. Go to the **Actions** tab on GitHub.
 2. Select the **Build**
-3. select branch and mention the tags and run the workflow.
+3. Select branch and mention the tags and run the workflow.
