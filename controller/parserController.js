@@ -3,12 +3,11 @@ const logger = require("../logger/logger");
 
 // exports.insertPromptsController = async (req, res) => {
 //   const { prompts } = req.body;
-//   console.log("prompts", prompts);
-//   if (!prompts || !Array.isArray(prompts) || prompts.length === 0) {
-//     logger.warn("Invalid data format received for insert operation.");
-//     return res
-//       .status(400)
-//       .json({ error: "Invalid data format. Expected an array of prompts." });
+
+//   if (!Array.isArray(prompts) || prompts.length === 0) {
+//     return res.status(400).json({
+//       error: "Invalid data format. Expected a non-empty array of prompts.",
+//     });
 //   }
 
 //   let connection;
@@ -18,9 +17,27 @@ const logger = require("../logger/logger");
 //     await connection.beginTransaction();
 
 //     for (const promptData of prompts) {
-//       const { prompt, db_column, column_type, parser_id } = promptData;
+//       const {
+//         prompt,
+//         db_column,
+//         column_type,
+//         parser_id,
+//         value_type,
+//         mandatory_value,
+//         prompt_order,
+//         name, // ← NEW
+//       } = promptData;
 
-//       if (!prompt || !db_column || !column_type || !parser_id) {
+//       // Validate required fields
+//       if (
+//         !prompt ||
+//         !db_column ||
+//         !column_type ||
+//         !parser_id ||
+//         !value_type ||
+//         !mandatory_value ||
+//         !prompt_order
+//       ) {
 //         logger.warn("Missing mandatory fields in insert request", {
 //           requestData: promptData,
 //         });
@@ -28,9 +45,13 @@ const logger = require("../logger/logger");
 //       }
 
 //       const query = `
-//         INSERT INTO llm_parser_prompt
-//         (id, prompt, db_column, column_type, parser_id, date_created, date_updated)
-//         VALUES (NULL, ?, ?, ?, ?, NOW(), NOW());
+//         INSERT INTO llm_parser_prompt (
+//           prompt, db_column, column_type, parser_id,
+//           value_type, mandatory_value, prompt_order,
+//           name,                   -- ← NEW COLUMN
+//           date_created, date_updated
+//         )
+//         VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW());
 //       `;
 
 //       await connection.query(query, [
@@ -38,21 +59,19 @@ const logger = require("../logger/logger");
 //         db_column,
 //         column_type,
 //         parser_id,
+//         value_type,
+//         mandatory_value,
+//         prompt_order,
+//         name || null, // ← use null if name is undefined
 //       ]);
 //     }
 
 //     await connection.commit();
 //     logger.info(`Successfully inserted ${prompts.length} prompts.`);
-
 //     res.status(200).json({ message: "Data inserted successfully." });
 //   } catch (error) {
 //     if (connection) await connection.rollback();
-
-//     logger.error("Error during insert operation", {
-//       error: error.message,
-//       stack: error.stack,
-//     });
-
+//     logger.error("Error during insert operation", error);
 //     res.status(500).json({ error: error.message || "Internal server error" });
 //   } finally {
 //     if (connection) connection.release();
@@ -74,6 +93,7 @@ exports.insertPromptsController = async (req, res) => {
     connection = await pool.getConnection();
     await connection.beginTransaction();
 
+    const insertValues = [];
     for (const promptData of prompts) {
       const {
         prompt,
@@ -83,10 +103,9 @@ exports.insertPromptsController = async (req, res) => {
         value_type,
         mandatory_value,
         prompt_order,
-        name, // ← NEW
+        name,
       } = promptData;
 
-      // Validate required fields
       if (
         !prompt ||
         !db_column ||
@@ -102,17 +121,7 @@ exports.insertPromptsController = async (req, res) => {
         throw new Error("Missing mandatory fields.");
       }
 
-      const query = `
-        INSERT INTO llm_parser_prompt (
-          prompt, db_column, column_type, parser_id,
-          value_type, mandatory_value, prompt_order,
-          name,                   -- ← NEW COLUMN
-          date_created, date_updated
-        )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW());
-      `;
-
-      await connection.query(query, [
+      insertValues.push([
         prompt,
         db_column,
         column_type,
@@ -120,16 +129,31 @@ exports.insertPromptsController = async (req, res) => {
         value_type,
         mandatory_value,
         prompt_order,
-        name || null, // ← use null if name is undefined
+        name || null,
+        new Date(), // date_created
+        new Date(), // date_updated
       ]);
     }
 
+    const query = `
+      INSERT INTO llm_parser_prompt (
+        prompt, db_column, column_type, parser_id,
+        value_type, mandatory_value, prompt_order,
+        name, date_created, date_updated
+      )
+      VALUES ?
+    `;
+
+    await connection.query(query, [insertValues]);
+
     await connection.commit();
-    logger.info(`Successfully inserted ${prompts.length} prompts.`);
+    logger.info(
+      `✅ Successfully inserted ${prompts.length} prompts (bulk insert).`
+    );
     res.status(200).json({ message: "Data inserted successfully." });
   } catch (error) {
     if (connection) await connection.rollback();
-    logger.error("Error during insert operation", error);
+    logger.error("❌ Error during insert operation", error);
     res.status(500).json({ error: error.message || "Internal server error" });
   } finally {
     if (connection) connection.release();

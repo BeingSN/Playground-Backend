@@ -11,7 +11,7 @@ const createPoolWithRetry = async (retries = 5, delay = 5000) => {
         password: process.env.MYSQL_PASSWORD,
         database: process.env.MYSQL_STAGE_DATABASE,
         waitForConnections: true,
-        connectionLimit: 10,
+        connectionLimit: 70,
         queueLimit: 0,
       });
 
