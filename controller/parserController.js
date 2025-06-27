@@ -1,82 +1,11 @@
 const dbPromise = require("../DbConnection");
 const logger = require("../logger/logger");
 
-// exports.insertPromptsController = async (req, res) => {
-//   const { prompts } = req.body;
-
-//   if (!Array.isArray(prompts) || prompts.length === 0) {
-//     return res.status(400).json({
-//       error: "Invalid data format. Expected a non-empty array of prompts.",
-//     });
-//   }
-
-//   let connection;
-//   try {
-//     const pool = await dbPromise;
-//     connection = await pool.getConnection();
-//     await connection.beginTransaction();
-
-//     for (const promptData of prompts) {
-//       const {
-//         prompt,
-//         db_column,
-//         column_type,
-//         parser_id,
-//         value_type,
-//         mandatory_value,
-//         prompt_order,
-//         name, // ← NEW
-//       } = promptData;
-
-//       // Validate required fields
-//       if (
-//         !prompt ||
-//         !db_column ||
-//         !column_type ||
-//         !parser_id ||
-//         !value_type ||
-//         !mandatory_value ||
-//         !prompt_order
-//       ) {
-//         logger.warn("Missing mandatory fields in insert request", {
-//           requestData: promptData,
-//         });
-//         throw new Error("Missing mandatory fields.");
-//       }
-
-//       const query = `
-//         INSERT INTO llm_parser_prompt (
-//           prompt, db_column, column_type, parser_id,
-//           value_type, mandatory_value, prompt_order,
-//           name,                   -- ← NEW COLUMN
-//           date_created, date_updated
-//         )
-//         VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW());
-//       `;
-
-//       await connection.query(query, [
-//         prompt,
-//         db_column,
-//         column_type,
-//         parser_id,
-//         value_type,
-//         mandatory_value,
-//         prompt_order,
-//         name || null, // ← use null if name is undefined
-//       ]);
-//     }
-
-//     await connection.commit();
-//     logger.info(`Successfully inserted ${prompts.length} prompts.`);
-//     res.status(200).json({ message: "Data inserted successfully." });
-//   } catch (error) {
-//     if (connection) await connection.rollback();
-//     logger.error("Error during insert operation", error);
-//     res.status(500).json({ error: error.message || "Internal server error" });
-//   } finally {
-//     if (connection) connection.release();
-//   }
-// };
+const allowedTables = [
+  "llm_parser_prompt",
+  "parser_config",
+  "llm_template_list",
+];
 
 exports.insertPromptsController = async (req, res) => {
   const { prompts } = req.body;
@@ -266,92 +195,6 @@ exports.createParserController = async (req, res) => {
   }
 };
 
-// Onboard template into `llm_template_list`
-// exports.onBoardTemplateController = async (req, res) => {
-//   try {
-//     const pool = await dbPromise;
-//     const connection = await pool.getConnection();
-
-//     const { parserId, templateName, textToMatchInTemplate, template_prompt } =
-//       req.body;
-
-//     if (!parserId || !templateName || !textToMatchInTemplate) {
-//       logger.warn("Missing required fields in onboarding request", {
-//         parserId,
-//         templateName,
-//         textToMatchInTemplate,
-//       });
-
-//       return res.status(400).json({ message: "Missing required fields" });
-//     }
-
-//     // Check if parser_id already exists
-//     const checkQuery = `SELECT id FROM llm_template_list WHERE parser_id = ? LIMIT 1`;
-//     const [existingTemplates] = await connection.execute(checkQuery, [
-//       parserId,
-//     ]);
-
-//     if (existingTemplates.length > 0) {
-//       connection.release();
-//       logger.warn("Duplicate parser ID detected", { parserId });
-
-//       return res.status(409).json({
-//         status: 409,
-//         error: "Conflict",
-//         message: "Parser ID already exists. Duplicate entries are not allowed.",
-//       });
-//     }
-
-//     const insertQuery = `
-//       INSERT INTO llm_template_list
-//       (id, template_name, template_matching_text, template_prompt, parser_id, date_created, date_updated)
-//       VALUES (NULL, ?, ?, ?, ?, NOW(), NOW());
-//     `;
-//     const values = [
-//       templateName,
-//       textToMatchInTemplate,
-//       template_prompt,
-//       parserId,
-//     ];
-
-//     const [result] = await connection.execute(insertQuery, values);
-//     connection.release();
-
-//     if (result.affectedRows > 0) {
-//       logger.info("Template onboarded successfully", {
-//         templateId: result.insertId,
-//         parserId,
-//         templateName,
-//       });
-
-//       return res.status(201).json({
-//         status: 201,
-//         message: "Template onboarded successfully!",
-//         templateId: result.insertId,
-//       });
-//     } else {
-//       logger.error("Failed to onboard template", { parserId, templateName });
-
-//       return res.status(400).json({
-//         status: 400,
-//         error: "Bad Request",
-//         message: "Failed to add template.",
-//       });
-//     }
-//   } catch (error) {
-//     logger.error("Error onboarding template", {
-//       error: error.message,
-//       stack: error.stack,
-//     });
-
-//     return res.status(500).json({
-//       status: 500,
-//       error: "Internal Server Error",
-//       message: "Something went wrong on the server.",
-//     });
-//   }
-// };
-
 exports.onBoardTemplateController = async (req, res) => {
   try {
     const pool = await dbPromise;
@@ -438,12 +281,7 @@ exports.onBoardTemplateController = async (req, res) => {
   }
 };
 
-const allowedTables = [
-  "llm_parser_prompt",
-  "parser_config",
-  "llm_template_list",
-];
-
+//PG-Stage Db Information
 exports.getAllTablesInformation = async (req, res) => {
   let connection;
   const { table, page = 1, limit = 10, search = "" } = req.query;
