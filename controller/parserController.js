@@ -1,14 +1,19 @@
 const dbPromise = require("../DbConnection");
 const logger = require("../logger/logger");
 
+const allowedTables = [
+  "llm_parser_prompt",
+  "parser_config",
+  "llm_template_list",
+];
+
 exports.insertPromptsController = async (req, res) => {
   const { prompts } = req.body;
-  console.log("prompts", prompts);
-  if (!prompts || !Array.isArray(prompts) || prompts.length === 0) {
-    logger.warn("Invalid data format received for insert operation.");
-    return res
-      .status(400)
-      .json({ error: "Invalid data format. Expected an array of prompts." });
+
+  if (!Array.isArray(prompts) || prompts.length === 0) {
+    return res.status(400).json({
+      error: "Invalid data format. Expected a non-empty array of prompts.",
+    });
   }
 
   let connection;
@@ -17,42 +22,67 @@ exports.insertPromptsController = async (req, res) => {
     connection = await pool.getConnection();
     await connection.beginTransaction();
 
+    const insertValues = [];
     for (const promptData of prompts) {
-      const { prompt, db_column, column_type, parser_id } = promptData;
+      const {
+        prompt,
+        db_column,
+        column_type,
+        parser_id,
+        value_type,
+        mandatory_value,
+        prompt_order,
+        name,
+      } = promptData;
 
-      if (!prompt || !db_column || !column_type || !parser_id) {
+      if (
+        !prompt ||
+        !db_column ||
+        !column_type ||
+        !parser_id ||
+        !value_type ||
+        !mandatory_value ||
+        !prompt_order
+      ) {
         logger.warn("Missing mandatory fields in insert request", {
           requestData: promptData,
         });
         throw new Error("Missing mandatory fields.");
       }
 
-      const query = `
-        INSERT INTO llm_parser_prompt
-        (id, prompt, db_column, column_type, parser_id, date_created, date_updated)
-        VALUES (NULL, ?, ?, ?, ?, NOW(), NOW());
-      `;
-
-      await connection.query(query, [
+      insertValues.push([
         prompt,
         db_column,
         column_type,
         parser_id,
+        value_type,
+        mandatory_value,
+        prompt_order,
+        name || null,
+        new Date(), // date_created
+        new Date(), // date_updated
       ]);
     }
 
-    await connection.commit();
-    logger.info(`Successfully inserted ${prompts.length} prompts.`);
+    const query = `
+      INSERT INTO llm_parser_prompt (
+        prompt, db_column, column_type, parser_id,
+        value_type, mandatory_value, prompt_order,
+        name, date_created, date_updated
+      )
+      VALUES ?
+    `;
 
+    await connection.query(query, [insertValues]);
+
+    await connection.commit();
+    logger.info(
+      `✅ Successfully inserted ${prompts.length} prompts (bulk insert).`
+    );
     res.status(200).json({ message: "Data inserted successfully." });
   } catch (error) {
     if (connection) await connection.rollback();
-
-    logger.error("Error during insert operation", {
-      error: error.message,
-      stack: error.stack,
-    });
-
+    logger.error("❌ Error during insert operation", error);
     res.status(500).json({ error: error.message || "Internal server error" });
   } finally {
     if (connection) connection.release();
@@ -62,11 +92,23 @@ exports.insertPromptsController = async (req, res) => {
 // Create parser in `parser_config`
 exports.createParserController = async (req, res) => {
   try {
+    /* ----------------------------------------------------------
+       1.  Get a pooled connection
+    ---------------------------------------------------------- */
     const pool = await dbPromise;
     const connection = await pool.getConnection();
 
+    /* ----------------------------------------------------------
+       2.  Read / validate input
+    ---------------------------------------------------------- */
     const orgId = process.env.ORG_ID?.trim();
-    const { parserName, databaseTableName, dbTableFileNameColumn } = req.body;
+    const {
+      parserName,
+      databaseTableName,
+      dbTableFileNameColumn,
+      selectedService, // ← NEW (comes from FE)
+    } = req.body;
+
     const validNameRegex = /^[a-zA-Z0-9_ ]+$/;
 
     if (!parserName || !validNameRegex.test(parserName)) {
@@ -74,6 +116,16 @@ exports.createParserController = async (req, res) => {
       return res.status(400).json({ message: "Invalid parser name." });
     }
 
+    if (!selectedService || typeof selectedService !== "string") {
+      logger.warn("Invalid selectedService received in request.", {
+        selectedService,
+      });
+      return res.status(400).json({ message: "Invalid selectedService." });
+    }
+
+    /* ----------------------------------------------------------
+       3.  Build the JSON config that goes into `config` column
+    ---------------------------------------------------------- */
     const configJSON = JSON.stringify({
       sql: "mysql",
       sqlUrl: `jdbc:mysql://${process.env.PARSER_CONFIG_MYSQL_HOST}:3306/${process.env.MYSQL_CLIENT_DB_NAME}`,
@@ -86,51 +138,63 @@ exports.createParserController = async (req, res) => {
       fileNameColumn: dbTableFileNameColumn,
     });
 
+    /* ----------------------------------------------------------
+       4.  Insert into parser_config
+    ---------------------------------------------------------- */
     const query = `
       INSERT INTO parser_config
-      (id, org_id, name, config, parser_type, sample_file, dynamic_parser,
-       dynamic_parser_vendor_text, dynamic_parser_vendor_config, dynamic_filename_match_text,
-       dynamic_parser_excel_cell_matching_text, dynamic_parser_excel_cell_address, dynamic_parser_excel_sheet_no,
-       azure_document_output, azure_output_updated_at, status, date_created, date_updated)
-      VALUES (NULL, ?, ?, ?, 'llm-parser', '', 0, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 'Active', NOW(), NOW());
+        (id, org_id, name, config, parser_type, service_type, sample_file, dynamic_parser,
+         dynamic_parser_vendor_text, dynamic_parser_vendor_config, dynamic_filename_match_text,
+         dynamic_parser_excel_cell_matching_text, dynamic_parser_excel_cell_address, dynamic_parser_excel_sheet_no,
+         azure_document_output, azure_output_updated_at, status, date_created, date_updated)
+      VALUES
+        (NULL, ?, ?, ?, 'llm-parser', ?, '', 0,           -- service_type placeholder (?)
+         NULL, NULL, NULL, NULL, NULL, NULL, '', NULL,
+         'Active', NOW(), NOW());
     `;
 
     const [result] = await connection.execute(query, [
-      orgId,
-      parserName,
-      configJSON,
+      orgId, // ?
+      parserName, // ?
+      configJSON, // ?
+      selectedService, // ?  ← service_type
     ]);
 
-    connection.release();
-
+    /* ----------------------------------------------------------
+       5.  Respond to client
+    ---------------------------------------------------------- */
     if (result.affectedRows > 0) {
       logger.info("Parser created successfully", {
         parserId: result.insertId,
         parserName,
         orgId,
+        selectedService,
       });
 
       return res.status(201).json({
         message: "Parser created successfully!",
         parserId: result.insertId,
       });
-    } else {
-      logger.error("Failed to create parser", { parserName, orgId });
-      return res.status(400).json({ message: "Failed to create parser" });
     }
+
+    logger.error("Failed to create parser", { parserName, orgId });
+    return res.status(400).json({ message: "Failed to create parser" });
   } catch (error) {
     logger.error("Error creating parser", {
       error: error.message,
       stack: error.stack,
     });
-
     return res
       .status(500)
       .json({ message: "Internal server error", error: error.message });
+  } finally {
+    // ensure connection always released
+    try {
+      if (connection) connection.release();
+    } catch (_) {}
   }
 };
 
-// Onboard template into `llm_template_list`
 exports.onBoardTemplateController = async (req, res) => {
   try {
     const pool = await dbPromise;
@@ -168,9 +232,10 @@ exports.onBoardTemplateController = async (req, res) => {
 
     const insertQuery = `
       INSERT INTO llm_template_list
-      (id, template_name, template_matching_text, template_prompt, parser_id, date_created, date_updated)
-      VALUES (NULL, ?, ?, ?, ?, NOW(), NOW());
+      (template_name, template_matching_text, template_prompt, parser_id, date_created, date_updated)
+      VALUES (?, ?, ?, ?, NOW(), NOW());
     `;
+
     const values = [
       templateName,
       textToMatchInTemplate,
@@ -216,12 +281,7 @@ exports.onBoardTemplateController = async (req, res) => {
   }
 };
 
-const allowedTables = [
-  "llm_parser_prompt",
-  "parser_config",
-  "llm_template_list",
-];
-
+//PG-Stage Db Information
 exports.getAllTablesInformation = async (req, res) => {
   let connection;
   const { table, page = 1, limit = 10, search = "" } = req.query;

@@ -4,18 +4,18 @@ env:
   SERVICE_NAME: express-app
   PROJECT_ID: dev-hachiai
   REPO_NAME: playground-2-0-be
-  
+
 on:
   workflow_dispatch:
     inputs:
       branch:
-        description: 'Branch to build from'
+        description: "Branch to build from"
         required: true
-        default: 'main'
+        default: "main"
       tag:
-        description: 'Docker image tag (e.g., version, commit SHA, etc.)'
+        description: "Docker image tag (e.g., version, commit SHA, etc.)"
         required: true
-        default: 'latest'
+        default: "qa"
 
 jobs:
   build-and-push:
@@ -30,7 +30,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Use a Node.js version that matches your project
+          node-version: "16" # Use a Node.js version that matches your project
 
       - name: Install dependencies
         run: npm install --legacy-peer-deps
@@ -55,8 +55,8 @@ jobs:
         run: |
           docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}:$IMAGE_TAG
 
-      - name: Tag and push 'latest' image
-        if: ${{ github.event.inputs.tag != 'latest' }}
+      - name: Tag and push 'qa' image
+        if: ${{ github.event.inputs.tag != 'qa' }}
         run: |
-          docker tag gcr.io/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}:$IMAGE_TAG gcr.io/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}:latest
-          docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}:latest
+          docker tag gcr.io/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}:$IMAGE_TAG gcr.io/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}:qa
+          docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}:qa
