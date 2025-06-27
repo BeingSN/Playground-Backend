@@ -11,4 +11,14 @@ router.post("/onboard-template", parserController.onBoardTemplateController);
 
 router.get("/get-all-tables-info", parserController.getAllTablesInformation);
 
+router.delete(
+  "/delete-stagedbData",
+  parserController.deleteStageDbRecordController
+);
+
+router.put(
+  "/update-stagedbData",
+  parserController.updateStageDbRecordController
+);
+
 module.exports = router;

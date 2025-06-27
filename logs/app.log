@@ -1587,3 +1587,13 @@
 {"level":"info","message":"✅ Successfully inserted 7 prompts (bulk insert).","timestamp":"2025-06-25T13:30:08.200Z"}
 {"level":"info","message":"✅ Successfully inserted 7 prompts (bulk insert).","timestamp":"2025-06-25T13:33:00.067Z"}
 {"level":"info","message":"✅ Successfully inserted 7 prompts (bulk insert).","timestamp":"2025-06-25T17:37:43.282Z"}
+{"level":"info","message":"✅ Deleted record from llm_parser_prompt where id = 7","timestamp":"2025-06-27T15:40:42.162Z"}
+{"level":"info","message":"Parser created successfully","orgId":"873f6d6c-c7d5-4d41-89c0-c37816430d04","parserId":44,"parserName":"parser name","selectedService":"vision_quest;minicmp2_6","timestamp":"2025-06-27T15:41:54.601Z"}
+{"level":"info","message":"Template onboarded successfully","parserId":"44","templateId":2,"templateName":"template name","timestamp":"2025-06-27T15:41:58.637Z"}
+{"level":"info","message":"Parser created successfully","orgId":"873f6d6c-c7d5-4d41-89c0-c37816430d04","parserId":45,"parserName":"dadasd","selectedService":"vision_quest;minicmp2_6","timestamp":"2025-06-27T15:42:21.412Z"}
+{"level":"info","message":"Template onboarded successfully","parserId":"45","templateId":3,"templateName":"ad","timestamp":"2025-06-27T15:42:35.212Z"}
+{"level":"info","message":"✅ Deleted record from llm_template_list where id = 2","timestamp":"2025-06-27T15:43:06.568Z"}
+{"level":"info","message":"✅ Deleted record from llm_template_list where id = 1","timestamp":"2025-06-27T15:43:09.484Z"}
+{"level":"info","message":"✅ Deleted record from llm_template_list where id = 3","timestamp":"2025-06-27T15:43:16.270Z"}
+{"level":"info","message":"✅ Updated record in llm_parser_prompt where id = 5","timestamp":"2025-06-27T15:50:19.058Z"}
+{"level":"info","message":"✅ Updated record in llm_parser_prompt where id = 5","timestamp":"2025-06-27T17:13:51.682Z"}

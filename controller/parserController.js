@@ -401,3 +401,122 @@ exports.getAllTablesInformation = async (req, res) => {
     if (connection) connection.release();
   }
 };
+
+//delete data from stage db
+exports.deleteStageDbRecordController = async (req, res) => {
+  const { tableName, id } = req.body;
+  let connection;
+
+  if (!tableName || !id) {
+    return res.status(400).json({ message: "Missing table or id." });
+  }
+
+  if (!allowedTables.includes(tableName)) {
+    return res.status(400).json({ message: "Invalid table name." });
+  }
+
+  try {
+    const pool = await dbPromise;
+    connection = await pool.getConnection();
+
+    // Get primary key column name
+    const [pkResult] = await connection.query(
+      `SHOW KEYS FROM ?? WHERE Key_name = 'PRIMARY'`,
+      [tableName]
+    );
+
+    const primaryKey = pkResult[0]?.Column_name;
+    if (!primaryKey) {
+      return res
+        .status(400)
+        .json({ message: `Primary key not found for table ${tableName}` });
+    }
+
+    const [result] = await connection.query(`DELETE FROM ?? WHERE ?? = ?`, [
+      tableName,
+      primaryKey,
+      id,
+    ]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Record not found." });
+    }
+
+    logger.info(
+      `✅ Deleted record from ${tableName} where ${primaryKey} = ${id}`
+    );
+    res.status(200).json({ message: "Record deleted successfully." });
+  } catch (error) {
+    logger.error("❌ Delete Error:", error.message);
+    res.status(500).json({ message: "Delete failed.", error: error.message });
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
+//update stagedb data
+exports.updateStageDbRecordController = async (req, res) => {
+  const { tableName, id, updates } = req.body;
+  let connection;
+
+  if (!tableName || !id || !updates || typeof updates !== "object") {
+    return res
+      .status(400)
+      .json({ message: "Missing table, id, or update values." });
+  }
+
+  if (!allowedTables.includes(tableName)) {
+    return res.status(400).json({ message: "Invalid table name." });
+  }
+
+  try {
+    const pool = await dbPromise;
+    connection = await pool.getConnection();
+
+    // Get primary key column name
+    const [pkResult] = await connection.query(
+      `SHOW KEYS FROM ?? WHERE Key_name = 'PRIMARY'`,
+      [tableName]
+    );
+
+    const primaryKey = pkResult[0]?.Column_name;
+    if (!primaryKey) {
+      return res
+        .status(400)
+        .json({ message: `Primary key not found for table ${tableName}` });
+    }
+
+    // Build SET clause dynamically
+    const setClause = Object.keys(updates)
+      .map(() => "?? = ?")
+      .join(", ");
+    const values = [];
+
+    Object.entries(updates).forEach(([key, value]) => {
+      values.push(key, value);
+    });
+
+    values.push(primaryKey, id);
+
+    const [result] = await connection.query(
+      `UPDATE ?? SET ${setClause} WHERE ?? = ?`,
+      [tableName, ...values]
+    );
+
+    if (result.affectedRows === 0) {
+      return res
+        .status(404)
+        .json({ message: "Record not found or not changed." });
+    }
+
+    logger.info(
+      `✅ Updated record in ${tableName} where ${primaryKey} = ${id}`
+    );
+    res.status(200).json({ message: "Record updated successfully." });
+  } catch (error) {
+    logger.error("❌ Update Error:", error.message);
+    res.status(500).json({ message: "Update failed.", error: error.message });
+  } finally {
+    if (connection) connection.release();
+  }
+};
