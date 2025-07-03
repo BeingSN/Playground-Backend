@@ -21,4 +21,21 @@ router.put(
   parserController.updateStageDbRecordController
 );
 
+router.post(
+  "/insert-browserPrompts",
+  parserController.insertBrowserPromptsController
+);
+
+router.get("/get-browserPrompts", parserController.getBrowserPromptsController);
+
+router.put(
+  "/update-browserPrompts/:id",
+  parserController.updateBrowserPromptsController
+);
+
+router.delete(
+  "/delete-browserPrompts/:id",
+  parserController.deleteBrowserPromptsController
+);
+
 module.exports = router;

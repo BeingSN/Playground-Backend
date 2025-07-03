@@ -520,3 +520,170 @@ exports.updateStageDbRecordController = async (req, res) => {
     if (connection) connection.release();
   }
 };
+
+//insert Browser-Prompts
+
+exports.insertBrowserPromptsController = async (req, res) => {
+  const prompts = req.body.prompts;
+  let connection;
+
+  if (!Array.isArray(prompts) || prompts.length === 0) {
+    return res
+      .status(400)
+      .json({ message: "Payload must contain an array of prompts." });
+  }
+
+  const allowedPriorities = ["low", "medium", "high"];
+  const values = [];
+
+  for (const item of prompts) {
+    const { prompt, priority } = item;
+
+    if (!prompt || !priority) {
+      return res
+        .status(400)
+        .json({ message: "Each prompt must have both prompt and priority." });
+    }
+
+    if (!allowedPriorities.includes(priority.toLowerCase())) {
+      return res.status(400).json({
+        message: `Invalid priority '${priority}'. Must be one of: ${allowedPriorities.join(
+          ", "
+        )}.`,
+      });
+    }
+
+    values.push([prompt, priority.toLowerCase()]);
+  }
+
+  try {
+    const pool = await dbPromise;
+    connection = await pool.getConnection();
+
+    const [result] = await connection.query(
+      `INSERT INTO browser_prompts (prompt, priority) VALUES ?`,
+      [values]
+    );
+
+    logger.info(`✅ Inserted ${result.affectedRows} browser prompt(s)`);
+
+    res.status(201).json({
+      message: `${result.affectedRows} browser prompt(s) inserted successfully.`,
+    });
+  } catch (error) {
+    logger.error("❌ Batch Insert Error:", error.message);
+    res.status(500).json({ message: "Insert failed.", error: error.message });
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
+exports.getBrowserPromptsController = async (req, res) => {
+  let connection;
+
+  try {
+    const pool = await dbPromise;
+    connection = await pool.getConnection();
+
+    const [rows] = await connection.query("SELECT * FROM browser_prompts");
+
+    res.status(200).json({
+      success: true,
+      data: rows,
+      message: "Data fetched successfully",
+    });
+  } catch (error) {
+    console.error("Error fetching browser prompts:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
+//update browser prompts
+
+exports.updateBrowserPromptsController = async (req, res) => {
+  let connection;
+
+  const { id } = req.params;
+  const { prompt, priority } = req.body;
+
+  if (!id) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Missing 'id' in query params." });
+  }
+
+  if (!prompt || !priority) {
+    return res.status(400).json({
+      success: false,
+      message: "Missing 'prompt' or 'priority' in body.",
+    });
+  }
+
+  try {
+    const pool = await dbPromise;
+    connection = await pool.getConnection();
+
+    const [result] = await connection.query(
+      "UPDATE browser_prompts SET prompt = ?, priority = ? WHERE id = ?",
+      [prompt, priority, id]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Prompt not found or no change made.",
+      });
+    }
+
+    res
+      .status(200)
+      .json({ success: true, message: "Prompt updated successfully." });
+  } catch (error) {
+    console.error("Error updating browser prompt:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
+//delete browser prompts
+exports.deleteBrowserPromptsController = async (req, res) => {
+  let connection;
+
+  const { id } = req.params;
+
+  if (!id) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Missing 'id' in query params." });
+  }
+
+  try {
+    const pool = await dbPromise;
+    connection = await pool.getConnection();
+
+    const [result] = await connection.query(
+      "DELETE FROM browser_prompts WHERE id = ?",
+      [id]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Prompt not found.",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Prompt deleted successfully.",
+    });
+  } catch (error) {
+    console.error("Error deleting browser prompt:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  } finally {
+    if (connection) connection.release();
+  }
+};
