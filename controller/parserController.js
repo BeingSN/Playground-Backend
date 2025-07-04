@@ -5,6 +5,7 @@ const allowedTables = [
   "llm_parser_prompt",
   "parser_config",
   "llm_template_list",
+  "browser_prompts",
 ];
 
 exports.insertPromptsController = async (req, res) => {
@@ -522,7 +523,6 @@ exports.updateStageDbRecordController = async (req, res) => {
 };
 
 //insert Browser-Prompts
-
 exports.insertBrowserPromptsController = async (req, res) => {
   const prompts = req.body.prompts;
   let connection;
@@ -533,27 +533,25 @@ exports.insertBrowserPromptsController = async (req, res) => {
       .json({ message: "Payload must contain an array of prompts." });
   }
 
-  const allowedPriorities = ["low", "medium", "high"];
   const values = [];
 
   for (const item of prompts) {
-    const { prompt, priority } = item;
+    const { prompt, prompt_order, use_case } = item;
 
-    if (!prompt || !priority) {
-      return res
-        .status(400)
-        .json({ message: "Each prompt must have both prompt and priority." });
-    }
-
-    if (!allowedPriorities.includes(priority.toLowerCase())) {
+    if (!prompt || prompt_order === undefined || !use_case) {
       return res.status(400).json({
-        message: `Invalid priority '${priority}'. Must be one of: ${allowedPriorities.join(
-          ", "
-        )}.`,
+        message:
+          "Each prompt must have 'prompt', 'prompt_order', and 'use_case'.",
       });
     }
 
-    values.push([prompt, priority.toLowerCase()]);
+    if (typeof prompt_order !== "number") {
+      return res.status(400).json({
+        message: "'prompt_order' must be a number.",
+      });
+    }
+
+    values.push([prompt, prompt_order, use_case]);
   }
 
   try {
@@ -561,7 +559,7 @@ exports.insertBrowserPromptsController = async (req, res) => {
     connection = await pool.getConnection();
 
     const [result] = await connection.query(
-      `INSERT INTO browser_prompts (prompt, priority) VALUES ?`,
+      `INSERT INTO browser_prompts (prompt, prompt_order, use_case) VALUES ?`,
       [values]
     );
 
@@ -578,6 +576,7 @@ exports.insertBrowserPromptsController = async (req, res) => {
   }
 };
 
+//get table prompts data
 exports.getBrowserPromptsController = async (req, res) => {
   let connection;
 
@@ -601,7 +600,6 @@ exports.getBrowserPromptsController = async (req, res) => {
 };
 
 //update browser prompts
-
 exports.updateBrowserPromptsController = async (req, res) => {
   let connection;
 
