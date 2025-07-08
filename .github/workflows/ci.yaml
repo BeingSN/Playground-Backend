@@ -15,7 +15,7 @@ on:
       tag:
         description: "Docker image tag (e.g., version, commit SHA, etc.)"
         required: true
-        default: "qa1"
+        default: "qa"
 
 jobs:
   build-and-push:
@@ -55,8 +55,8 @@ jobs:
         run: |
           docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}:$IMAGE_TAG
 
-      - name: Tag and push 'qa1' image
-        if: ${{ github.event.inputs.tag != 'qa1' }}
+      - name: Tag and push 'qa' image
+        if: ${{ github.event.inputs.tag != 'qa' }}
         run: |
-          docker tag gcr.io/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}:$IMAGE_TAG gcr.io/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}:qa1
-          docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}:qa1
+          docker tag gcr.io/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}:$IMAGE_TAG gcr.io/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}:qa
+          docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}:qa

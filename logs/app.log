@@ -2606,3 +2606,210 @@
 {"level":"info","message":"✅ Deleted record from browser_prompts where id = 2","timestamp":"2025-07-04T11:40:06.240Z"}
 {"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T11:40:06.247Z"}
 {"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 7ms)","timestamp":"2025-07-04T11:40:06.252Z"}
+{"0":"id","1":"org_id","10":"dynamic_parser_excel_cell_matching_text","11":"dynamic_parser_excel_cell_address","12":"dynamic_parser_excel_sheet_no","13":"azure_document_output","14":"azure_output_updated_at","15":"status","16":"date_created","17":"date_updated","18":"service_type","2":"name","3":"config","4":"parser_type","5":"sample_file","6":"dynamic_parser","7":"dynamic_parser_vendor_text","8":"dynamic_parser_vendor_config","9":"dynamic_filename_match_text","level":"info","message":"✅ Retrieved columns for table parser_config:","timestamp":"2025-07-04T11:56:31.975Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records (Execution Time: 24ms)","timestamp":"2025-07-04T11:56:31.982Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T11:56:32.872Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 8ms)","timestamp":"2025-07-04T11:56:32.876Z"}
+{"level":"info","message":"✅ Deleted record from browser_prompts where id = 1","timestamp":"2025-07-04T11:56:38.715Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T11:56:38.724Z"}
+{"level":"info","message":"⚠️ No records found for table: browser_prompts with search filter: ","timestamp":"2025-07-04T11:56:38.727Z"}
+{"level":"info","message":"✅ Inserted 1 browser prompt(s)","timestamp":"2025-07-04T11:56:43.816Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T11:56:46.251Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 7ms)","timestamp":"2025-07-04T11:56:46.255Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T11:59:33.489Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 13ms)","timestamp":"2025-07-04T11:59:33.494Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T11:59:44.222Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 16ms)","timestamp":"2025-07-04T11:59:44.233Z"}
+{"level":"info","message":"✅ Updated record in browser_prompts where id = 3","timestamp":"2025-07-04T11:59:54.275Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T11:59:54.282Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 7ms)","timestamp":"2025-07-04T11:59:54.286Z"}
+{"level":"info","message":"✅ Updated record in browser_prompts where id = 3","timestamp":"2025-07-04T12:00:06.449Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T12:00:06.466Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 10ms)","timestamp":"2025-07-04T12:00:06.472Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T12:00:20.479Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 11ms)","timestamp":"2025-07-04T12:00:20.483Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T12:00:22.835Z"}
+{"level":"info","message":"⚠️ No records found for table: browser_prompts with search filter: ihel","timestamp":"2025-07-04T12:00:22.840Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T12:00:24.086Z"}
+{"level":"info","message":"⚠️ No records found for table: browser_prompts with search filter: hello","timestamp":"2025-07-04T12:00:24.090Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T12:00:25.687Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 18ms)","timestamp":"2025-07-04T12:00:25.697Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T12:00:38.192Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 14ms)","timestamp":"2025-07-04T12:00:38.196Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T12:00:40.818Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 8ms)","timestamp":"2025-07-04T12:00:40.821Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T12:00:47.961Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 11ms)","timestamp":"2025-07-04T12:00:47.968Z"}
+{"0":"id","1":"org_id","10":"dynamic_parser_excel_cell_matching_text","11":"dynamic_parser_excel_cell_address","12":"dynamic_parser_excel_sheet_no","13":"azure_document_output","14":"azure_output_updated_at","15":"status","16":"date_created","17":"date_updated","18":"service_type","2":"name","3":"config","4":"parser_type","5":"sample_file","6":"dynamic_parser","7":"dynamic_parser_vendor_text","8":"dynamic_parser_vendor_config","9":"dynamic_filename_match_text","level":"info","message":"✅ Retrieved columns for table parser_config:","timestamp":"2025-07-04T14:09:36.058Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records (Execution Time: 15ms)","timestamp":"2025-07-04T14:09:36.065Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T14:09:36.840Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 5ms)","timestamp":"2025-07-04T14:09:36.843Z"}
+{"level":"info","message":"✅ Updated record in browser_prompts where id = 3","timestamp":"2025-07-04T14:09:54.355Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T14:09:54.360Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 7ms)","timestamp":"2025-07-04T14:09:54.365Z"}
+{"level":"info","message":"✅ Updated record in browser_prompts where id = 3","timestamp":"2025-07-04T14:10:07.936Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T14:10:07.942Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 8ms)","timestamp":"2025-07-04T14:10:07.948Z"}
+{"level":"info","message":"✅ Updated record in browser_prompts where id = 3","timestamp":"2025-07-04T14:10:13.770Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T14:10:13.780Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 10ms)","timestamp":"2025-07-04T14:10:13.783Z"}
+{"0":"id","1":"prompt","10":"name","2":"db_column","3":"column_type","4":"parser_id","5":"date_created","6":"date_updated","7":"value_type","8":"mandatory_value","9":"prompt_order","level":"info","message":"✅ Retrieved columns for table llm_parser_prompt:","timestamp":"2025-07-04T14:10:18.291Z"}
+{"level":"info","message":"✅ llm_parser_prompt: Fetched 7 records (Execution Time: 11ms)","timestamp":"2025-07-04T14:10:18.297Z"}
+{"0":"id","1":"template_name","2":"template_matching_text","3":"template_prompt","4":"parser_id","5":"date_created","6":"date_updated","level":"info","message":"✅ Retrieved columns for table llm_template_list:","timestamp":"2025-07-04T14:10:20.146Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 3 records (Execution Time: 10ms)","timestamp":"2025-07-04T14:10:20.151Z"}
+{"0":"id","1":"org_id","10":"dynamic_parser_excel_cell_matching_text","11":"dynamic_parser_excel_cell_address","12":"dynamic_parser_excel_sheet_no","13":"azure_document_output","14":"azure_output_updated_at","15":"status","16":"date_created","17":"date_updated","18":"service_type","2":"name","3":"config","4":"parser_type","5":"sample_file","6":"dynamic_parser","7":"dynamic_parser_vendor_text","8":"dynamic_parser_vendor_config","9":"dynamic_filename_match_text","level":"info","message":"✅ Retrieved columns for table parser_config:","timestamp":"2025-07-04T14:10:20.785Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records (Execution Time: 17ms)","timestamp":"2025-07-04T14:10:20.796Z"}
+{"0":"id","1":"prompt","10":"name","2":"db_column","3":"column_type","4":"parser_id","5":"date_created","6":"date_updated","7":"value_type","8":"mandatory_value","9":"prompt_order","level":"info","message":"✅ Retrieved columns for table llm_parser_prompt:","timestamp":"2025-07-04T14:10:57.592Z"}
+{"level":"info","message":"✅ llm_parser_prompt: Fetched 7 records (Execution Time: 6ms)","timestamp":"2025-07-04T14:10:57.596Z"}
+{"0":"id","1":"org_id","10":"dynamic_parser_excel_cell_matching_text","11":"dynamic_parser_excel_cell_address","12":"dynamic_parser_excel_sheet_no","13":"azure_document_output","14":"azure_output_updated_at","15":"status","16":"date_created","17":"date_updated","18":"service_type","2":"name","3":"config","4":"parser_type","5":"sample_file","6":"dynamic_parser","7":"dynamic_parser_vendor_text","8":"dynamic_parser_vendor_config","9":"dynamic_filename_match_text","level":"info","message":"✅ Retrieved columns for table parser_config:","timestamp":"2025-07-04T15:31:06.706Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records (Execution Time: 21ms)","timestamp":"2025-07-04T15:31:06.713Z"}
+{"0":"id","1":"template_name","2":"template_matching_text","3":"template_prompt","4":"parser_id","5":"date_created","6":"date_updated","level":"info","message":"✅ Retrieved columns for table llm_template_list:","timestamp":"2025-07-04T15:31:14.003Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 3 records (Execution Time: 15ms)","timestamp":"2025-07-04T15:31:14.014Z"}
+{"0":"id","1":"prompt","10":"name","2":"db_column","3":"column_type","4":"parser_id","5":"date_created","6":"date_updated","7":"value_type","8":"mandatory_value","9":"prompt_order","level":"info","message":"✅ Retrieved columns for table llm_parser_prompt:","timestamp":"2025-07-04T15:31:14.726Z"}
+{"level":"info","message":"✅ llm_parser_prompt: Fetched 7 records (Execution Time: 12ms)","timestamp":"2025-07-04T15:31:14.732Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T15:31:15.745Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 8ms)","timestamp":"2025-07-04T15:31:15.749Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T15:31:21.824Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 21ms)","timestamp":"2025-07-04T15:31:21.828Z"}
+{"0":"id","1":"prompt","10":"name","2":"db_column","3":"column_type","4":"parser_id","5":"date_created","6":"date_updated","7":"value_type","8":"mandatory_value","9":"prompt_order","level":"info","message":"✅ Retrieved columns for table llm_parser_prompt:","timestamp":"2025-07-04T15:31:23.810Z"}
+{"level":"info","message":"✅ llm_parser_prompt: Fetched 12 records (Execution Time: 9ms)","timestamp":"2025-07-04T15:31:23.816Z"}
+{"0":"id","1":"org_id","10":"dynamic_parser_excel_cell_matching_text","11":"dynamic_parser_excel_cell_address","12":"dynamic_parser_excel_sheet_no","13":"azure_document_output","14":"azure_output_updated_at","15":"status","16":"date_created","17":"date_updated","18":"service_type","2":"name","3":"config","4":"parser_type","5":"sample_file","6":"dynamic_parser","7":"dynamic_parser_vendor_text","8":"dynamic_parser_vendor_config","9":"dynamic_filename_match_text","level":"info","message":"✅ Retrieved columns for table parser_config:","timestamp":"2025-07-04T15:31:24.740Z"}
+{"level":"info","message":"✅ parser_config: Fetched 50 records (Execution Time: 11ms)","timestamp":"2025-07-04T15:31:24.747Z"}
+{"0":"id","1":"org_id","10":"dynamic_parser_excel_cell_matching_text","11":"dynamic_parser_excel_cell_address","12":"dynamic_parser_excel_sheet_no","13":"azure_document_output","14":"azure_output_updated_at","15":"status","16":"date_created","17":"date_updated","18":"service_type","2":"name","3":"config","4":"parser_type","5":"sample_file","6":"dynamic_parser","7":"dynamic_parser_vendor_text","8":"dynamic_parser_vendor_config","9":"dynamic_filename_match_text","level":"info","message":"✅ Retrieved columns for table parser_config:","timestamp":"2025-07-04T15:31:31.855Z"}
+{"level":"info","message":"✅ parser_config: Fetched 10 records (Execution Time: 8ms)","timestamp":"2025-07-04T15:31:31.859Z"}
+{"0":"id","1":"org_id","10":"dynamic_parser_excel_cell_matching_text","11":"dynamic_parser_excel_cell_address","12":"dynamic_parser_excel_sheet_no","13":"azure_document_output","14":"azure_output_updated_at","15":"status","16":"date_created","17":"date_updated","18":"service_type","2":"name","3":"config","4":"parser_type","5":"sample_file","6":"dynamic_parser","7":"dynamic_parser_vendor_text","8":"dynamic_parser_vendor_config","9":"dynamic_filename_match_text","level":"info","message":"✅ Retrieved columns for table parser_config:","timestamp":"2025-07-04T15:31:34.847Z"}
+{"level":"info","message":"✅ parser_config: Fetched 20 records (Execution Time: 13ms)","timestamp":"2025-07-04T15:31:34.852Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T15:48:03.655Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 10ms)","timestamp":"2025-07-04T15:48:03.660Z"}
+{"0":"id","1":"prompt","10":"name","2":"db_column","3":"column_type","4":"parser_id","5":"date_created","6":"date_updated","7":"value_type","8":"mandatory_value","9":"prompt_order","level":"info","message":"✅ Retrieved columns for table llm_parser_prompt:","timestamp":"2025-07-04T15:48:08.145Z"}
+{"level":"info","message":"✅ llm_parser_prompt: Fetched 12 records (Execution Time: 8ms)","timestamp":"2025-07-04T15:48:08.150Z"}
+{"0":"id","1":"template_name","2":"template_matching_text","3":"template_prompt","4":"parser_id","5":"date_created","6":"date_updated","level":"info","message":"✅ Retrieved columns for table llm_template_list:","timestamp":"2025-07-04T15:48:10.972Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 3 records (Execution Time: 9ms)","timestamp":"2025-07-04T15:48:10.977Z"}
+{"0":"id","1":"org_id","10":"dynamic_parser_excel_cell_matching_text","11":"dynamic_parser_excel_cell_address","12":"dynamic_parser_excel_sheet_no","13":"azure_document_output","14":"azure_output_updated_at","15":"status","16":"date_created","17":"date_updated","18":"service_type","2":"name","3":"config","4":"parser_type","5":"sample_file","6":"dynamic_parser","7":"dynamic_parser_vendor_text","8":"dynamic_parser_vendor_config","9":"dynamic_filename_match_text","level":"info","message":"✅ Retrieved columns for table parser_config:","timestamp":"2025-07-04T15:48:13.207Z"}
+{"level":"info","message":"✅ parser_config: Fetched 20 records (Execution Time: 11ms)","timestamp":"2025-07-04T15:48:13.212Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-04T15:48:14.457Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 9ms)","timestamp":"2025-07-04T15:48:14.462Z"}
+{"level":"info","message":"✅ Inserted 1 browser prompt(s)","timestamp":"2025-07-07T12:59:06.426Z"}
+{"level":"info","message":"✅ Inserted 1 browser prompt(s)","timestamp":"2025-07-07T13:00:07.151Z"}
+{"0":"id","1":"org_id","10":"dynamic_parser_excel_cell_matching_text","11":"dynamic_parser_excel_cell_address","12":"dynamic_parser_excel_sheet_no","13":"azure_document_output","14":"azure_output_updated_at","15":"status","16":"date_created","17":"date_updated","18":"service_type","2":"name","3":"config","4":"parser_type","5":"sample_file","6":"dynamic_parser","7":"dynamic_parser_vendor_text","8":"dynamic_parser_vendor_config","9":"dynamic_filename_match_text","level":"info","message":"✅ Retrieved columns for table parser_config:","timestamp":"2025-07-07T13:01:32.984Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records (Execution Time: 33ms)","timestamp":"2025-07-07T13:01:32.997Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-07T13:01:35.187Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 3 records (Execution Time: 16ms)","timestamp":"2025-07-07T13:01:35.198Z"}
+{"level":"info","message":"✅ Inserted 1 browser prompt(s)","timestamp":"2025-07-07T13:05:59.832Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-07T13:12:23.522Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 29ms)","timestamp":"2025-07-07T13:12:23.532Z"}
+{"level":"info","message":"✅ Inserted 3 browser prompt(s)","timestamp":"2025-07-07T13:12:50.904Z"}
+{"0":"id","1":"org_id","10":"dynamic_parser_excel_cell_matching_text","11":"dynamic_parser_excel_cell_address","12":"dynamic_parser_excel_sheet_no","13":"azure_document_output","14":"azure_output_updated_at","15":"status","16":"date_created","17":"date_updated","18":"service_type","2":"name","3":"config","4":"parser_type","5":"sample_file","6":"dynamic_parser","7":"dynamic_parser_vendor_text","8":"dynamic_parser_vendor_config","9":"dynamic_filename_match_text","level":"info","message":"✅ Retrieved columns for table parser_config:","timestamp":"2025-07-07T14:27:15.027Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records (Execution Time: 19ms)","timestamp":"2025-07-07T14:27:15.032Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-07T14:27:17.060Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 7 records (Execution Time: 12ms)","timestamp":"2025-07-07T14:27:17.067Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-07T14:27:26.621Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 7 records (Execution Time: 11ms)","timestamp":"2025-07-07T14:27:26.627Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-07T14:27:30.043Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 7 records (Execution Time: 15ms)","timestamp":"2025-07-07T14:27:30.051Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-07T14:27:32.115Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 7 records (Execution Time: 27ms)","timestamp":"2025-07-07T14:27:32.127Z"}
+{"0":"id","1":"org_id","10":"dynamic_parser_excel_cell_matching_text","11":"dynamic_parser_excel_cell_address","12":"dynamic_parser_excel_sheet_no","13":"azure_document_output","14":"azure_output_updated_at","15":"status","16":"date_created","17":"date_updated","18":"service_type","2":"name","3":"config","4":"parser_type","5":"sample_file","6":"dynamic_parser","7":"dynamic_parser_vendor_text","8":"dynamic_parser_vendor_config","9":"dynamic_filename_match_text","level":"info","message":"✅ Retrieved columns for table parser_config:","timestamp":"2025-07-07T14:27:35.309Z"}
+{"level":"info","message":"✅ parser_config: Fetched 10 records (Execution Time: 8ms)","timestamp":"2025-07-07T14:27:35.313Z"}
+{"0":"id","1":"org_id","10":"dynamic_parser_excel_cell_matching_text","11":"dynamic_parser_excel_cell_address","12":"dynamic_parser_excel_sheet_no","13":"azure_document_output","14":"azure_output_updated_at","15":"status","16":"date_created","17":"date_updated","18":"service_type","2":"name","3":"config","4":"parser_type","5":"sample_file","6":"dynamic_parser","7":"dynamic_parser_vendor_text","8":"dynamic_parser_vendor_config","9":"dynamic_filename_match_text","level":"info","message":"✅ Retrieved columns for table parser_config:","timestamp":"2025-07-07T14:27:37.694Z"}
+{"level":"info","message":"✅ parser_config: Fetched 50 records (Execution Time: 9ms)","timestamp":"2025-07-07T14:27:37.699Z"}
+{"0":"id","1":"template_name","2":"template_matching_text","3":"template_prompt","4":"parser_id","5":"date_created","6":"date_updated","level":"info","message":"✅ Retrieved columns for table llm_template_list:","timestamp":"2025-07-07T14:27:48.821Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 3 records (Execution Time: 8ms)","timestamp":"2025-07-07T14:27:48.827Z"}
+{"0":"id","1":"prompt","10":"name","2":"db_column","3":"column_type","4":"parser_id","5":"date_created","6":"date_updated","7":"value_type","8":"mandatory_value","9":"prompt_order","level":"info","message":"✅ Retrieved columns for table llm_parser_prompt:","timestamp":"2025-07-07T14:27:49.270Z"}
+{"level":"info","message":"✅ llm_parser_prompt: Fetched 12 records (Execution Time: 19ms)","timestamp":"2025-07-07T14:27:49.285Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-07T14:27:49.729Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 7 records (Execution Time: 16ms)","timestamp":"2025-07-07T14:27:49.735Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-07T14:27:58.153Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 7 records (Execution Time: 13ms)","timestamp":"2025-07-07T14:27:58.159Z"}
+{"0":"id","1":"template_name","2":"template_matching_text","3":"template_prompt","4":"parser_id","5":"date_created","6":"date_updated","level":"info","message":"✅ Retrieved columns for table llm_template_list:","timestamp":"2025-07-07T14:28:01.610Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 3 records (Execution Time: 10ms)","timestamp":"2025-07-07T14:28:01.615Z"}
+{"0":"id","1":"org_id","10":"dynamic_parser_excel_cell_matching_text","11":"dynamic_parser_excel_cell_address","12":"dynamic_parser_excel_sheet_no","13":"azure_document_output","14":"azure_output_updated_at","15":"status","16":"date_created","17":"date_updated","18":"service_type","2":"name","3":"config","4":"parser_type","5":"sample_file","6":"dynamic_parser","7":"dynamic_parser_vendor_text","8":"dynamic_parser_vendor_config","9":"dynamic_filename_match_text","level":"info","message":"✅ Retrieved columns for table parser_config:","timestamp":"2025-07-07T15:05:19.963Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records (Execution Time: 23ms)","timestamp":"2025-07-07T15:05:19.969Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-07T15:05:21.515Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 7 records (Execution Time: 9ms)","timestamp":"2025-07-07T15:05:21.520Z"}
+{"level":"info","message":"✅ Updated record in browser_prompts where id = 3","timestamp":"2025-07-07T15:06:21.553Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-07T15:06:21.569Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 7 records (Execution Time: 14ms)","timestamp":"2025-07-07T15:06:21.572Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-07T15:10:05.319Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 7 records (Execution Time: 23ms)","timestamp":"2025-07-07T15:10:05.326Z"}
+{"0":"id","1":"prompt","10":"name","2":"db_column","3":"column_type","4":"parser_id","5":"date_created","6":"date_updated","7":"value_type","8":"mandatory_value","9":"prompt_order","level":"info","message":"✅ Retrieved columns for table llm_parser_prompt:","timestamp":"2025-07-07T15:10:06.369Z"}
+{"level":"info","message":"✅ llm_parser_prompt: Fetched 7 records (Execution Time: 7ms)","timestamp":"2025-07-07T15:10:06.372Z"}
+{"0":"id","1":"template_name","2":"template_matching_text","3":"template_prompt","4":"parser_id","5":"date_created","6":"date_updated","level":"info","message":"✅ Retrieved columns for table llm_template_list:","timestamp":"2025-07-07T15:10:15.251Z"}
+{"level":"info","message":"✅ llm_template_list: Fetched 3 records (Execution Time: 14ms)","timestamp":"2025-07-07T15:10:15.258Z"}
+{"0":"id","1":"prompt","10":"name","2":"db_column","3":"column_type","4":"parser_id","5":"date_created","6":"date_updated","7":"value_type","8":"mandatory_value","9":"prompt_order","level":"info","message":"✅ Retrieved columns for table llm_parser_prompt:","timestamp":"2025-07-07T15:10:16.247Z"}
+{"level":"info","message":"✅ llm_parser_prompt: Fetched 7 records (Execution Time: 11ms)","timestamp":"2025-07-07T15:10:16.254Z"}
+{"level":"info","message":"✅ Inserted 1 browser prompt(s)","timestamp":"2025-07-08T15:56:40.003Z"}
+{"0":"id","1":"org_id","10":"dynamic_parser_excel_cell_matching_text","11":"dynamic_parser_excel_cell_address","12":"dynamic_parser_excel_sheet_no","13":"azure_document_output","14":"azure_output_updated_at","15":"status","16":"date_created","17":"date_updated","18":"service_type","2":"name","3":"config","4":"parser_type","5":"sample_file","6":"dynamic_parser","7":"dynamic_parser_vendor_text","8":"dynamic_parser_vendor_config","9":"dynamic_filename_match_text","level":"info","message":"✅ Retrieved columns for table parser_config:","timestamp":"2025-07-08T15:57:05.613Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records (Execution Time: 24ms)","timestamp":"2025-07-08T15:57:05.626Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T15:57:06.644Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 15ms)","timestamp":"2025-07-08T15:57:06.648Z"}
+{"0":"id","1":"prompt","10":"name","2":"db_column","3":"column_type","4":"parser_id","5":"date_created","6":"date_updated","7":"value_type","8":"mandatory_value","9":"prompt_order","level":"info","message":"✅ Retrieved columns for table llm_parser_prompt:","timestamp":"2025-07-08T15:57:32.294Z"}
+{"level":"info","message":"✅ llm_parser_prompt: Fetched 7 records (Execution Time: 12ms)","timestamp":"2025-07-08T15:57:32.301Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T15:57:32.707Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 11ms)","timestamp":"2025-07-08T15:57:32.712Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T15:57:44.637Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 6ms)","timestamp":"2025-07-08T15:57:44.640Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T15:58:15.324Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 1 records (Execution Time: 13ms)","timestamp":"2025-07-08T15:58:15.329Z"}
+{"level":"info","message":"✅ Inserted 3 browser prompt(s)","timestamp":"2025-07-08T15:59:18.706Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T15:59:23.217Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 18ms)","timestamp":"2025-07-08T15:59:23.226Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T15:59:37.490Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 3 records (Execution Time: 10ms)","timestamp":"2025-07-08T15:59:37.496Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T16:01:08.479Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 27ms)","timestamp":"2025-07-08T16:01:08.486Z"}
+{"0":"id","1":"org_id","10":"dynamic_parser_excel_cell_matching_text","11":"dynamic_parser_excel_cell_address","12":"dynamic_parser_excel_sheet_no","13":"azure_document_output","14":"azure_output_updated_at","15":"status","16":"date_created","17":"date_updated","18":"service_type","2":"name","3":"config","4":"parser_type","5":"sample_file","6":"dynamic_parser","7":"dynamic_parser_vendor_text","8":"dynamic_parser_vendor_config","9":"dynamic_filename_match_text","level":"info","message":"✅ Retrieved columns for table parser_config:","timestamp":"2025-07-08T16:04:42.167Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records (Execution Time: 16ms)","timestamp":"2025-07-08T16:04:42.171Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T16:04:42.954Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 8ms)","timestamp":"2025-07-08T16:04:42.958Z"}
+{"level":"info","message":"✅ Updated record in browser_prompts where id = 1","timestamp":"2025-07-08T16:04:46.707Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T16:04:46.714Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 5ms)","timestamp":"2025-07-08T16:04:46.717Z"}
+{"level":"info","message":"✅ Updated record in browser_prompts where id = 1","timestamp":"2025-07-08T16:04:50.199Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T16:04:50.219Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 8ms)","timestamp":"2025-07-08T16:04:50.223Z"}
+{"level":"info","message":"✅ Updated record in browser_prompts where id = 1","timestamp":"2025-07-08T16:04:54.309Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T16:04:54.321Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 10ms)","timestamp":"2025-07-08T16:04:54.325Z"}
+{"level":"info","message":"✅ Updated record in browser_prompts where id = 1","timestamp":"2025-07-08T16:04:58.728Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T16:04:58.739Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 9ms)","timestamp":"2025-07-08T16:04:58.743Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T16:08:49.083Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 12ms)","timestamp":"2025-07-08T16:08:49.088Z"}
+{"0":"id","1":"prompt","10":"name","2":"db_column","3":"column_type","4":"parser_id","5":"date_created","6":"date_updated","7":"value_type","8":"mandatory_value","9":"prompt_order","level":"info","message":"✅ Retrieved columns for table llm_parser_prompt:","timestamp":"2025-07-08T16:09:46.917Z"}
+{"level":"info","message":"✅ llm_parser_prompt: Fetched 7 records (Execution Time: 16ms)","timestamp":"2025-07-08T16:09:46.921Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T16:09:47.193Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 17ms)","timestamp":"2025-07-08T16:09:47.202Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T16:13:23.966Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 16ms)","timestamp":"2025-07-08T16:13:23.971Z"}
+{"level":"info","message":"✅ Updated record in browser_prompts where id = 1","timestamp":"2025-07-08T16:13:31.076Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T16:13:31.090Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 14ms)","timestamp":"2025-07-08T16:13:31.094Z"}
+{"level":"info","message":"✅ Updated record in browser_prompts where id = 1","timestamp":"2025-07-08T16:13:35.648Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T16:13:35.653Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 6ms)","timestamp":"2025-07-08T16:13:35.657Z"}
+{"level":"info","message":"✅ Updated record in browser_prompts where id = 1","timestamp":"2025-07-08T16:13:44.051Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T16:13:44.068Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 5ms)","timestamp":"2025-07-08T16:13:44.071Z"}
+{"level":"info","message":"✅ Updated record in browser_prompts where id = 1","timestamp":"2025-07-08T16:13:55.245Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T16:13:55.256Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 9ms)","timestamp":"2025-07-08T16:13:55.260Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T16:24:58.618Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 31ms)","timestamp":"2025-07-08T16:24:58.626Z"}
+{"level":"info","message":"✅ Updated record in browser_prompts where id = 1","timestamp":"2025-07-08T16:25:04.787Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T16:25:04.792Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 4ms)","timestamp":"2025-07-08T16:25:04.794Z"}
+{"level":"info","message":"✅ Updated record in browser_prompts where id = 1","timestamp":"2025-07-08T16:25:08.012Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T16:25:08.022Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 9ms)","timestamp":"2025-07-08T16:25:08.026Z"}
+{"level":"info","message":"✅ Updated record in browser_prompts where id = 2","timestamp":"2025-07-08T16:25:12.056Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T16:25:12.073Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 18ms)","timestamp":"2025-07-08T16:25:12.083Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T16:42:37.346Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 13ms)","timestamp":"2025-07-08T16:42:37.351Z"}
+{"0":"id","1":"prompt","10":"name","2":"db_column","3":"column_type","4":"parser_id","5":"date_created","6":"date_updated","7":"value_type","8":"mandatory_value","9":"prompt_order","level":"info","message":"✅ Retrieved columns for table llm_parser_prompt:","timestamp":"2025-07-08T16:42:39.511Z"}
+{"level":"info","message":"✅ llm_parser_prompt: Fetched 7 records (Execution Time: 10ms)","timestamp":"2025-07-08T16:42:39.516Z"}
+{"0":"id","1":"prompt","2":"prompt_order","3":"use_case","level":"info","message":"✅ Retrieved columns for table browser_prompts:","timestamp":"2025-07-08T16:42:41.195Z"}
+{"level":"info","message":"✅ browser_prompts: Fetched 4 records (Execution Time: 8ms)","timestamp":"2025-07-08T16:42:41.197Z"}
+{"0":"id","1":"org_id","10":"dynamic_parser_excel_cell_matching_text","11":"dynamic_parser_excel_cell_address","12":"dynamic_parser_excel_sheet_no","13":"azure_document_output","14":"azure_output_updated_at","15":"status","16":"date_created","17":"date_updated","18":"service_type","2":"name","3":"config","4":"parser_type","5":"sample_file","6":"dynamic_parser","7":"dynamic_parser_vendor_text","8":"dynamic_parser_vendor_config","9":"dynamic_filename_match_text","level":"info","message":"✅ Retrieved columns for table parser_config:","timestamp":"2025-07-08T16:48:37.793Z"}
+{"level":"info","message":"✅ parser_config: Fetched 7 records (Execution Time: 12ms)","timestamp":"2025-07-08T16:48:37.798Z"}
