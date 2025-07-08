@@ -5,6 +5,7 @@ const allowedTables = [
   "llm_parser_prompt",
   "parser_config",
   "llm_template_list",
+  "browser_prompts",
 ];
 
 exports.insertPromptsController = async (req, res) => {
@@ -397,6 +398,289 @@ exports.getAllTablesInformation = async (req, res) => {
       message:
         error.message || "Something went wrong while fetching table data.",
     });
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
+//delete data from stage db
+exports.deleteStageDbRecordController = async (req, res) => {
+  const { tableName, id } = req.body;
+  let connection;
+
+  if (!tableName || !id) {
+    return res.status(400).json({ message: "Missing table or id." });
+  }
+
+  if (!allowedTables.includes(tableName)) {
+    return res.status(400).json({ message: "Invalid table name." });
+  }
+
+  try {
+    const pool = await dbPromise;
+    connection = await pool.getConnection();
+
+    // Get primary key column name
+    const [pkResult] = await connection.query(
+      `SHOW KEYS FROM ?? WHERE Key_name = 'PRIMARY'`,
+      [tableName]
+    );
+
+    const primaryKey = pkResult[0]?.Column_name;
+    if (!primaryKey) {
+      return res
+        .status(400)
+        .json({ message: `Primary key not found for table ${tableName}` });
+    }
+
+    const [result] = await connection.query(`DELETE FROM ?? WHERE ?? = ?`, [
+      tableName,
+      primaryKey,
+      id,
+    ]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Record not found." });
+    }
+
+    logger.info(
+      `✅ Deleted record from ${tableName} where ${primaryKey} = ${id}`
+    );
+    res.status(200).json({ message: "Record deleted successfully." });
+  } catch (error) {
+    logger.error("❌ Delete Error:", error.message);
+    res.status(500).json({ message: "Delete failed.", error: error.message });
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
+//update stagedb data
+exports.updateStageDbRecordController = async (req, res) => {
+  const { tableName, id, updates } = req.body;
+  let connection;
+
+  if (!tableName || !id || !updates || typeof updates !== "object") {
+    return res
+      .status(400)
+      .json({ message: "Missing table, id, or update values." });
+  }
+
+  if (!allowedTables.includes(tableName)) {
+    return res.status(400).json({ message: "Invalid table name." });
+  }
+
+  try {
+    const pool = await dbPromise;
+    connection = await pool.getConnection();
+
+    // Get primary key column name
+    const [pkResult] = await connection.query(
+      `SHOW KEYS FROM ?? WHERE Key_name = 'PRIMARY'`,
+      [tableName]
+    );
+
+    const primaryKey = pkResult[0]?.Column_name;
+    if (!primaryKey) {
+      return res
+        .status(400)
+        .json({ message: `Primary key not found for table ${tableName}` });
+    }
+
+    // Build SET clause dynamically
+    const setClause = Object.keys(updates)
+      .map(() => "?? = ?")
+      .join(", ");
+    const values = [];
+
+    Object.entries(updates).forEach(([key, value]) => {
+      values.push(key, value);
+    });
+
+    values.push(primaryKey, id);
+
+    const [result] = await connection.query(
+      `UPDATE ?? SET ${setClause} WHERE ?? = ?`,
+      [tableName, ...values]
+    );
+
+    if (result.affectedRows === 0) {
+      return res
+        .status(404)
+        .json({ message: "Record not found or not changed." });
+    }
+
+    logger.info(
+      `✅ Updated record in ${tableName} where ${primaryKey} = ${id}`
+    );
+    res.status(200).json({ message: "Record updated successfully." });
+  } catch (error) {
+    logger.error("❌ Update Error:", error.message);
+    res.status(500).json({ message: "Update failed.", error: error.message });
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
+//insert Browser-Prompts
+exports.insertBrowserPromptsController = async (req, res) => {
+  const prompts = req.body.prompts;
+  let connection;
+
+  if (!Array.isArray(prompts) || prompts.length === 0) {
+    return res
+      .status(400)
+      .json({ message: "Payload must contain an array of prompts." });
+  }
+
+  const values = [];
+
+  for (const item of prompts) {
+    const { prompt, prompt_order, use_case } = item;
+
+    if (!prompt || prompt_order === undefined || !use_case) {
+      return res.status(400).json({
+        message:
+          "Each prompt must have 'prompt', 'prompt_order', and 'use_case'.",
+      });
+    }
+
+    if (typeof prompt_order !== "number") {
+      return res.status(400).json({
+        message: "'prompt_order' must be a number.",
+      });
+    }
+
+    values.push([prompt, prompt_order, use_case]);
+  }
+
+  try {
+    const pool = await dbPromise;
+    connection = await pool.getConnection();
+
+    const [result] = await connection.query(
+      `INSERT INTO browser_prompts (prompt, prompt_order, use_case) VALUES ?`,
+      [values]
+    );
+
+    logger.info(`✅ Inserted ${result.affectedRows} browser prompt(s)`);
+
+    res.status(201).json({
+      message: `${result.affectedRows} browser prompt(s) inserted successfully.`,
+    });
+  } catch (error) {
+    logger.error("❌ Batch Insert Error:", error.message);
+    res.status(500).json({ message: "Insert failed.", error: error.message });
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
+//get table prompts data
+exports.getBrowserPromptsController = async (req, res) => {
+  let connection;
+
+  try {
+    const pool = await dbPromise;
+    connection = await pool.getConnection();
+
+    const [rows] = await connection.query("SELECT * FROM browser_prompts");
+
+    res.status(200).json({
+      success: true,
+      data: rows,
+      message: "Data fetched successfully",
+    });
+  } catch (error) {
+    console.error("Error fetching browser prompts:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
+//update browser prompts
+exports.updateBrowserPromptsController = async (req, res) => {
+  let connection;
+
+  const { id } = req.params;
+  const { prompt, priority } = req.body;
+
+  if (!id) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Missing 'id' in query params." });
+  }
+
+  if (!prompt || !priority) {
+    return res.status(400).json({
+      success: false,
+      message: "Missing 'prompt' or 'priority' in body.",
+    });
+  }
+
+  try {
+    const pool = await dbPromise;
+    connection = await pool.getConnection();
+
+    const [result] = await connection.query(
+      "UPDATE browser_prompts SET prompt = ?, priority = ? WHERE id = ?",
+      [prompt, priority, id]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Prompt not found or no change made.",
+      });
+    }
+
+    res
+      .status(200)
+      .json({ success: true, message: "Prompt updated successfully." });
+  } catch (error) {
+    console.error("Error updating browser prompt:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
+//delete browser prompts
+exports.deleteBrowserPromptsController = async (req, res) => {
+  let connection;
+
+  const { id } = req.params;
+
+  if (!id) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Missing 'id' in query params." });
+  }
+
+  try {
+    const pool = await dbPromise;
+    connection = await pool.getConnection();
+
+    const [result] = await connection.query(
+      "DELETE FROM browser_prompts WHERE id = ?",
+      [id]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Prompt not found.",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Prompt deleted successfully.",
+    });
+  } catch (error) {
+    console.error("Error deleting browser prompt:", error);
+    res.status(500).json({ success: false, message: "Server error" });
   } finally {
     if (connection) connection.release();
   }
